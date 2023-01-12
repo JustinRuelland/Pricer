@@ -1,0 +1,7 @@
+Sujet : Pricer. Créer un programme pour déterminer le prix d’une option financi`ere, ainsi que la stratégie de réplication dans le modèle de Black-Scholes-Merton. Dans la plupart des cas o`u les formules explicites ne s’appliquent pas,
+on calculera ces prix par méthode de Monte-Carlo.
+
+Consignes. Chaque ´equipe projet devra fournir un rapport et le code source comment´e et ´eventuellement des donn´ees n´ecessaires `a son fonctionnement. Le rapport (fourni sous la forme d’une archive .zip) devra contenir: • une description de ce que fait le programme, comment le faire fonctionner (avec tous les d´etails utiles!) et comment il est architectur´e
+• une critique des probl`emes rencontr´es et des solutions adopt´ees
+• la description de l’architecture g´en´erale du programme Prendre soin de pr´esenter les ´el´ements de mani`ere claire. Les programmes doivent compiler et ˆetre ex´ecut´es sans erreur (prendre bien soin de tester dans des conditions diverses). V´erifier que votre rendu est complet et conforme (une bonne fa¸con de faire est de l’envoyer `a vos coll`egues de groupe et qu’il testent
+eux-mˆemes si tout fonctionne dans un environnement ”neuf”).
