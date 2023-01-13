@@ -1,3 +1,5 @@
-Options\ pricer/x64/**
+Options\pricer/x64/**
 **/.vs
-*.log
+**.log
+*.tlog
+Options\pricer/x64/Debug/Options\pricer.ilk
