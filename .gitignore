@@ -1,2 +1,3 @@
-**/x64
+Options\ pricer/x64/**
 **/.vs
+*.log
