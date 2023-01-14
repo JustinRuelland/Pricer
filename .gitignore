@@ -3,4 +3,6 @@ Options\pricer/x64/**
 **.log
 *.tlog
 Options pricer/x64/
+
+*.vcxproj
 *.filters
