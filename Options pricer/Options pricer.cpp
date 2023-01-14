@@ -1,12 +1,11 @@
 #include <iostream>
 #include "cdf.h"
-
+#include "european_call.h"
 
 int main()
 {
 	std::cout << "Hello World!\n";
-	int n = 100000;
-	double d = 0;
 
-	std::cout<<cdf(d,n)<<std::endl;
+	european_call call1;
+	call1.price();
 }

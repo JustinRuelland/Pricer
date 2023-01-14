@@ -2,5 +2,5 @@ Options\pricer/x64/**
 **/.vs
 **.log
 *.tlog
-Test/
 Options pricer/x64/
+*.filters
