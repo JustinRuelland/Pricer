@@ -2,7 +2,9 @@
 #include "option.h"
 
 class european_call : public option {
-
 public :
-	void price();
+	european_call();
+	european_call(double& K, double& S, double& T, double& sigma);
+
+	double price() const;
 };
