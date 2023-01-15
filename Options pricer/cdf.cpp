@@ -2,9 +2,11 @@
 #include <iostream>
 #include <random>
 
-double cdf(double& d, int& n) {
+double cdf(double& d) {
 	std::default_random_engine generator(time(0));
 	std::normal_distribution<double> distribution(0.0, 1.0);
+
+	int n = 100000;
 
 	double sum = 0;
 	for (int i = 0; i < n; i++) {

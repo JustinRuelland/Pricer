@@ -6,3 +6,4 @@ Options pricer/x64/
 
 *.vcxproj
 *.filters
+*.user

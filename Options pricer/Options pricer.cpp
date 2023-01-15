@@ -6,6 +6,4 @@ int main()
 {
 	std::cout << "Hello World!\n";
 
-	european_call call1;
-	call1.price();
 }
