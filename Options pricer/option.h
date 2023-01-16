@@ -1,4 +1,7 @@
 #pragma once
+#include <iostream>
+using namespace std;
+
 class option {
 protected : 
 	double K = 1 ; // strike
@@ -23,4 +26,7 @@ public :
 
 	static void set_r(double& r) { option::r = r; };
 	static double get_r() { return option::r; }
+
+	friend ostream& operator<<(ostream& output, const option& call);
+
 };

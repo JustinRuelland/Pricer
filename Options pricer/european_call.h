@@ -17,5 +17,4 @@ public :
 	// Member function
 	double price() const;
 
-	friend ostream& operator<<(ostream& output, const european_call& call);
 };
