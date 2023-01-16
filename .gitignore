@@ -7,3 +7,5 @@ Options pricer/x64/
 *.vcxproj
 *.filters
 *.user
+
+.DS_Store
