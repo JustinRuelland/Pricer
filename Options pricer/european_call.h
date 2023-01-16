@@ -1,5 +1,7 @@
 #pragma once
 #include "option.h"
+#include <iostream>
+using namespace std;
 
 class european_call : public option {
 public :
@@ -15,4 +17,5 @@ public :
 	// Member function
 	double price() const;
 
+	friend ostream& operator<<(ostream& output, const european_call& call);
 };
