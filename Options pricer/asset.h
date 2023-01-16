@@ -4,21 +4,22 @@ class asset {
 	
 	protected :
 
-	double SpotPrice = NULL;
-	double Volatility = NULL;
+	double SpotPrice;
+	double Volatility;
 
-	int DividendsType = NULL; 
+	int DividendsType; 
 	/*  An asset without dividends =0; 
 		An asset with lump payment of dividends =1; 
 		An asset with continuous dividend payment =2; */
 
-	double DividendsRate = NULL;
-	double DividendsPeriods = NULL; // The period between two dividend's payments for an asset with lump payment of dividends
+	double DividendsRate;
+	double DividendsPeriods; // The period between two dividend's payments for an asset with lump payment of dividends
+	double NextDividend;
 
 	public :
 
 	asset(); 
-	asset(double SpotPrice, double Volatility, int DividendsType, double DividendsRate, double);
+	asset(double SpotPrice, double Volatility, int DividendsType, double DividendsRate, double DividendsPeriods, double NextDividend);
 	asset(const asset& A1);
 	~asset();
 
@@ -28,7 +29,7 @@ class asset {
 	double get_Volatility() const;
 	// void set_Volatility(double V);
 
-	double get_DividendsType() const;
+	int get_DividendsType() const;
 	// void set_dividendsType(int T);
 
 	double get_DividendsRate() const;
@@ -37,10 +38,12 @@ class asset {
 	double get_DividendsPeriods() const;
 	// void set_DividendsPeriods(double Periodicity);
 
-	double get_DividendsPayoff(double time) const;
+	double get_NextDividend() const;
+
+	double get_DividendsPayoff(double current_time) const;
 
 
 
 
 
-}
+};
