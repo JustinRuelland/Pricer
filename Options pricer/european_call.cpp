@@ -39,7 +39,7 @@ double european_call::price() const {
 
 std::ostream &operator<<(std::ostream &output, const european_call & call) {
 
-	output << "\nMaturity : " << call.T <<" ans\n"<<"Spot price : "<< call.S << "\nStrike : "<< call.K << "\nVolatility : "<<call.sigma<<"\nRisk free rate : "<<option::get_r()<<"\n";
+	output << "\nMaturity : " << call.T <<" ans\n"<<"Spot price : "<< call.S << "\nStrike : "<< call.K << "\nVolatility : "<<call.sigma<<"\nRisk free rate : "<<option::get_r()<<"\n\nPrice (Black-Scholes method) : "<<call.price();
 
 	return output;
 }
