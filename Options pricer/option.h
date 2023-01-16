@@ -20,4 +20,7 @@ public :
 	void set_S(double& S) { this->S = S; };
 	void set_T(double& T) { this->T = T; };
 	void set_sigma(double& sigma) { this->sigma = sigma; };
+
+	static void set_r(double& r) { option::r = r; };
+	static double get_r() { return option::r; }
 };
