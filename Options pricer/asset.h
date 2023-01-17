@@ -1,49 +1,89 @@
 #pragma once
 
-class asset {
-	
-	protected :
-
-	double SpotPrice;
-	double Volatility;
-
-	int DividendsType; 
+class dividend {
+protected:
+	int Type; 
 	/*  An asset without dividends =0; 
 		An asset with lump payment of dividends =1; 
 		An asset with continuous dividend payment =2; */
 
-	double DividendsRate;
-	double DividendsPeriods; // The period between two dividend's payments for an asset with lump payment of dividends
-	double NextDividend;
+	double Rate;
 
-	public :
+	int Periods; 
+	// The period between two dividend's payments for an asset with lump payment of dividends
 
-	asset(); 
-	asset(double SpotPrice, double Volatility, int DividendsType, double DividendsRate, double DividendsPeriods, double NextDividend);
-	asset(const asset& A1);
-	~asset();
+	int Next;
 
-	double get_SpotPrice() const;
-	// void set_SpotPrice(double S);
-
-	double get_Volatility() const;
-	// void set_Volatility(double V);
-
-	int get_DividendsType() const;
-	// void set_dividendsType(int T);
-
-	double get_DividendsRate() const;
-	// void set_DividendsRate(double r);
-
-	double get_DividendsPeriods() const;
-	// void set_DividendsPeriods(double Periodicity);
-
-	double get_NextDividend() const;
-
-	double get_DividendsPayoff(double current_time) const;
+public:
+	//************** Primary functions **************
+	dividend();
+	dividend(int DividendsType, double DividendsRate, int DividendsPeriods, int NextDividend);
+	dividend(dividend&);
+	~dividend(){};
 
 
+	//************** Basic functions **************
+	//*** Getter ***
+	int get_Type() const;
+	double get_Rate() const;
+	int get_Periods() const;
+	int get_Next() const;
 
 
+	//*** Setter ***
+	void set_Type(int);
+	void set_Rate(double);
+	void set_Periods(int);
+	void set_Next(int);
 
 };
+
+
+class asset {
+protected:
+	//************** Basic features **************
+	int CurrentTime;
+
+	double SpotPrice;
+
+	double Volatility;
+
+
+	//************** Dividends feature **************
+
+	dividend Dividends;
+
+public:
+
+	//************** Primary functions **************
+	asset();
+	asset(int CurrentTime, double SpotPrice, double Volatility, dividend Dividends);
+	asset(asset&);
+	~asset(){};
+
+
+	//************** Basic functions **************
+	//*** Getter ***
+	int get_CurrentTime() const;
+	double get_SpotPrice() const;
+	double get_Volatility() const;
+	dividend get_Dividends() const;
+
+	//*** Setter ***
+	void set_CurrentTime(int);
+	void set_SpotPrice(double);
+	void set_Volatility(double);
+	void set_Dividends(dividend);
+
+
+	//************** Advanced functions **************
+
+	asset Asset_Actualization(int NewTime, double SpotPrice) const;
+	asset Asset_Estimation(int Time, double RiskFreeRate) const;  
+};
+
+
+
+
+
+
