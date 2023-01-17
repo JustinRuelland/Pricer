@@ -9,3 +9,4 @@ Options pricer/x64/
 *.user
 
 .DS_Store
+test
