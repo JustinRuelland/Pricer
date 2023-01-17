@@ -18,7 +18,7 @@ public:
 	//************** Primary functions **************
 	dividend();
 	dividend(int DividendsType, double DividendsRate, int DividendsPeriods, int NextDividend);
-	dividend(dividend&);
+	dividend(const dividend&);
 	~dividend(){};
 
 
@@ -78,7 +78,7 @@ public:
 
 	//************** Advanced functions **************
 
-	asset Asset_Actualization(int NewTime, double SpotPrice) const;
+	void Asset_Actualization(int NewTime, double SpotPrice);
 	asset Asset_Estimation(int Time, double RiskFreeRate) const;  
 };
 
