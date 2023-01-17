@@ -5,7 +5,7 @@ using namespace std;
 double option::r = 0.05;
 
 // Constructors
-option::option(double& K, double& S, double& T, double& sigma) {
+option::option(double K, double S, double T, double sigma) {
 	this->K = K;
 	this->S = S;
 	this->T = T;

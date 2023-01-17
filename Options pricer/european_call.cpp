@@ -2,14 +2,6 @@
 #include "european_call.h"
 #include "cdf.h"
 
-// Constructors
-/*european_call::european_call(european_call& call) {
-	this->K = call.K;
-	this->S = call.S;
-	this->T = call.T;
-	this->sigma = call.sigma;
-}*/
-
 // Destructor
 european_call::~european_call() {};
 

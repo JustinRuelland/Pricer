@@ -4,17 +4,17 @@ using namespace std;
 
 class option {
 protected : 
-	double K = 1 ; // strike
-	double S = 1; // spot price
-	double T = 1; // maturity (in years)
-	double sigma = 1; // volatility
+	double K = 0 ; // strike
+	double S = 0; // spot price
+	double T = 0; // maturity (in years)
+	double sigma = 0; // volatility
 
 	static double r; // risk free rate
 
 public :
 	// Constructor
 	option() {};
-	option(double& K, double& S, double& T, double& sigma);
+	option(double K, double S, double T, double sigma);
 	option(option&);
 
 	// Member functions
@@ -25,12 +25,12 @@ public :
 	double get_T() { return this->T; };
 	double get_sigma() { return this->sigma; };
 
-	void set_K(double& K) { this->K = K; };
-	void set_S(double& S) { this->S = S; };
-	void set_T(double& T) { this->T = T; };
-	void set_sigma(double& sigma) { this->sigma = sigma; };
+	void set_K(double K) { this->K = K; };
+	void set_S(double S) { this->S = S; };
+	void set_T(double T) { this->T = T; };
+	void set_sigma(double sigma) { this->sigma = sigma; };
 
-	static void set_r(double& r) { option::r = r; };
+	static void set_r(double r) { option::r = r; };
 	static double get_r() { return option::r; }
 
 	// Non-member function
