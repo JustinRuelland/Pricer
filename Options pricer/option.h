@@ -12,6 +12,12 @@ protected :
 	static double r; // risk free rate
 
 public :
+	// Constructor
+	option() {};
+	option(double& K, double& S, double& T, double& sigma);
+	option(option&);
+
+	// Member functions
 	virtual double price() const = 0;
 
 	double get_K() {return this->K;};
@@ -27,6 +33,7 @@ public :
 	static void set_r(double& r) { option::r = r; };
 	static double get_r() { return option::r; }
 
+	// Non-member function
 	friend ostream& operator<<(ostream& output, const option& o);
 	friend istream& operator>>(istream& input, option& o);
 };

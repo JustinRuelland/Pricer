@@ -3,26 +3,12 @@
 #include "cdf.h"
 
 // Constructors
-european_call::european_call() {
-	this->K = 1;
-	this->S = 1;
-	this->T = 1;
-	this->sigma = 1;
-}
-
-european_call::european_call(double& K, double& S, double& T, double& sigma) {
-	this->K = K;
-	this->S = S;
-	this->T = T;
-	this->sigma = sigma;
-}
-
-european_call::european_call(european_call& call) {
+/*european_call::european_call(european_call& call) {
 	this->K = call.K;
 	this->S = call.S;
 	this->T = call.T;
 	this->sigma = call.sigma;
-}
+}*/
 
 // Destructor
 european_call::~european_call() {};
