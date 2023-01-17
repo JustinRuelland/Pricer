@@ -27,6 +27,6 @@ public :
 	static void set_r(double& r) { option::r = r; };
 	static double get_r() { return option::r; }
 
-	friend ostream& operator<<(ostream& output, const option& call);
-
+	friend ostream& operator<<(ostream& output, const option& o);
+	friend istream& operator>>(istream& input, option& o);
 };
