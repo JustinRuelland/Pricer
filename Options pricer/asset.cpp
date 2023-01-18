@@ -162,7 +162,27 @@ int DividendCounter(int Delta, int Next, int Periods){
 
 asset Asset_Estimation(int Time, double RiskFreeRate) const{
 	asset AssetEstimate = *this;
-	 
+	// Computation of the expected spot price of the asset at time t=Time
+	// Following the dividends type, the pricing is different
+	dividend DivAsEs = AssetEstimate.get_Dividends();
+	int DivType = DivAsEs.get_Type();
+	double ExpectedPrice;
+	int OldTime = AssetEstimate.get_CurrentTime();
+	int Next = DivAsEs.get_Next();
+	double DivRate = DivAsEs.get_Rate();
+
+	if(DivType == 0){ 
+		ExpectedPrice = SpotPrice * exp( RiskFreeRate * (Time - OldTime) );
+		AssetEstimate.Asset_Actualization(Time, ExpectedPrice);
+	}else if(DivType == 1){
+		int DivCount = DividendCounter( Time - OldTime, Next);
+		ExpectedPrice = SpotPrice * exp( RiskFreeRate * (Time - OldTime)) * pow((1 - DivRate), DivCount);
+	}else{
+		ExpectedPrice = SpotPrice * exp( (RiskFreeRate - DivRate ) * (Time - OldTime));
+	}
+
+	AssetEstimate.Asset_Actualization(Time, ExpectedPrice);
+	return AssetEstimate;
 }
 
 
