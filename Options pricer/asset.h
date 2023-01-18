@@ -1,5 +1,7 @@
 #pragma once
 
+int DividendCounter(int Delta, int Next, int Periods);
+
 class dividend {
 protected:
 	int Type; 
@@ -58,7 +60,7 @@ public:
 	//************** Primary functions **************
 	asset();
 	asset(int CurrentTime, double SpotPrice, double Volatility, dividend Dividends);
-	asset(asset&);
+	asset(const asset&);
 	~asset(){};
 
 

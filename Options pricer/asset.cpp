@@ -82,7 +82,7 @@ asset::asset(int CurrentTime, double SpotPrice, double Volatility, dividend Divi
 	this->Dividends = Dividends;
 }
 
-asset::asset(asset& Asset1){
+asset::asset(const asset& Asset1){
 	this->CurrentTime = Asset1.CurrentTime;
 	this->SpotPrice = Asset1.SpotPrice;
 	this->Volatility = Asset1.Volatility;
@@ -160,7 +160,7 @@ int DividendCounter(int Delta, int Next, int Periods){
 
 
 
-asset Asset_Estimation(int Time, double RiskFreeRate) const{
+asset asset::Asset_Estimation(int Time, double RiskFreeRate) const{
 	asset AssetEstimate = *this;
 	// Computation of the expected spot price of the asset at time t=Time
 	// Following the dividends type, the pricing is different
@@ -170,15 +170,17 @@ asset Asset_Estimation(int Time, double RiskFreeRate) const{
 	int OldTime = AssetEstimate.get_CurrentTime();
 	int Next = DivAsEs.get_Next();
 	double DivRate = DivAsEs.get_Rate();
+	int Periods = DivAsEs.get_Periods();
+	double PriceOldTime = AssetEstimate.get_SpotPrice();
 
 	if(DivType == 0){ 
-		ExpectedPrice = SpotPrice * exp( RiskFreeRate * (Time - OldTime) );
+		ExpectedPrice = PriceOldTime * exp( RiskFreeRate * (Time - OldTime) );
 		AssetEstimate.Asset_Actualization(Time, ExpectedPrice);
 	}else if(DivType == 1){
-		int DivCount = DividendCounter( Time - OldTime, Next);
-		ExpectedPrice = SpotPrice * exp( RiskFreeRate * (Time - OldTime)) * pow((1 - DivRate), DivCount);
+		int DivCount = DividendCounter( Time - OldTime, Next, Periods);
+		ExpectedPrice = PriceOldTime * exp( RiskFreeRate * (Time - OldTime)) * pow((1 - DivRate), DivCount);
 	}else{
-		ExpectedPrice = SpotPrice * exp( (RiskFreeRate - DivRate ) * (Time - OldTime));
+		ExpectedPrice = PriceOldTime * exp( (RiskFreeRate - DivRate ) * (Time - OldTime));
 	}
 
 	AssetEstimate.Asset_Actualization(Time, ExpectedPrice);
@@ -189,7 +191,7 @@ asset Asset_Estimation(int Time, double RiskFreeRate) const{
 
 int main(int argc, char const *argv[])
 {
-	std::cout << DividendCounter(1, 2, 15) << std::endl;
+	std::cout << 15/2 << std::endl;
 	return 0;
 }
 
