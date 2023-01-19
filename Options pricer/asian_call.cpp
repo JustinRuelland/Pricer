@@ -43,3 +43,7 @@ string asian_call::type() const {
 	string name = "Asian call";
 	return name;
 }
+
+void asian_call::replication() const {
+	cout << "Replication not implemented in this program. (An " << this->type() << " is not easily replicable)." << endl;
+}
