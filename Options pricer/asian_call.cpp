@@ -1,6 +1,8 @@
 #include <iostream>
 #include "asian_call.h"
 #include <random>
+#include <string>
+using namespace std;
 
 // Destructor
 asian_call::~asian_call() {};
@@ -36,3 +38,8 @@ double asian_call::price() const {
 
 	return V/N;
 };
+
+string asian_call::type() const {
+	string name = "Asian call";
+	return name;
+}

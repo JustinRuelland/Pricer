@@ -1,6 +1,8 @@
 #include <iostream>
 #include "european_call.h"
 #include "cdf.h"
+#include <string>
+using namespace std;
 
 // Destructor
 european_call::~european_call() {};
@@ -13,4 +15,9 @@ double european_call::price() const {
 	double V = S * cdf(d_1) - K * exp(-r * T) * cdf(d_2);
 
 	return V;
+};
+
+string european_call::type() const {
+	string name = "European call";
+	return name;
 };

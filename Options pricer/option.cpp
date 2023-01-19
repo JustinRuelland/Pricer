@@ -20,21 +20,22 @@ option::option(option& o) {
 
 // Overloading of the operators << and >> of iostream
 std::ostream& operator<<(std::ostream& output, const option& o) {
-	output << "\nStrike : " << o.K << "\nSpot price : " << o.S << "\nMaturity : " << o.T << " years"   << "\nVolatility : " << o.sigma << "\nRisk free rate : " << option::get_r()*100 <<"%"<< "\n\nPrice (Black-Scholes method) : " << o.price();
+	output << "Your option is an " << o.type() <<" with : " << "\n - Strike : " << o.K << "\n - Spot price : " << o.S << "\n - Maturity : " << o.T << " years" << "\n - Volatility : " << o.sigma << "\n - Risk free rate : " << option::get_r() * 100 << "%" << "\n\n - Price (Black-Scholes method) : " << o.price();
 	return output;
 };
 
 std::istream& operator>>(std::istream& input, option& o) {
-	cout << "\n\nEnter the option's strike : ";
+	cout << "\n\nYou are defining an " << o.type()<<".";
+	cout <<"\n - Enter the option's strike : ";
 	input >> o.K;
-	cout << "Enter the underlying asset's spot price : ";
+	cout << " - Enter the underlying asset's spot price : ";
 	input >> o.S;
-	cout << "Enter the option's maturity : ";
+	cout << " - Enter the option's maturity : ";
 	input >> o.T;
-	cout << "Enter the underlying's volatility : ";
+	cout << " - Enter the underlying's volatility : ";
 	input >> o.sigma;
 
-	cout << "The price of the option you have just defined is : " << o.price() << ".\n";
+	cout << "The price of the " << o.type() << " you have just defined is : " << o.price() << ".\n";
 
 	return input;
 };

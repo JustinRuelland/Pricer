@@ -1,5 +1,7 @@
 #include "asian_put.h"
 #include<random>
+#include <string>
+using namespace std;
 
 // Destructor
 asian_put::~asian_put() {};
@@ -34,4 +36,9 @@ double asian_put::price() const {
 	};
 
 	return V / N;
+}
+
+string asian_put::type() const {
+	string name = "Asian put";
+	return name;
 }

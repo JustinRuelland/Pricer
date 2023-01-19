@@ -1,5 +1,7 @@
 #pragma once
 #include "option.h"
+#include <string>
+using namespace std;
 
 class european_call : public option {
 public :
@@ -13,5 +15,6 @@ public :
 
 	// Member function
 	double price() const;
+	string type() const;
 
 };
