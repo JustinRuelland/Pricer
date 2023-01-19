@@ -1,6 +1,6 @@
 #pragma once
 
-int DividendCounter(int Delta, int Next, int Periods);
+int DividendCounter(double Delta, double Next, double Periods);
 char* NameCopie(const char chaine[20]);
 
 class dividend {
@@ -12,15 +12,15 @@ protected:
 
 	double Rate;
 
-	int Periods; 
+	double Periods; 
 	// The period between two dividend's payments for an asset with lump payment of dividends
 
-	int Next;
+	double Next;
 
 public:
 	//************** Primary functions **************
 	dividend();
-	dividend(int DividendsType, double DividendsRate, int DividendsPeriods, int NextDividend);
+	dividend(int DividendsType, double DividendsRate, double DividendsPeriods, double NextDividend);
 	dividend(const dividend&);
 	~dividend(){};
 
@@ -29,15 +29,15 @@ public:
 	//*** Getter ***
 	int get_Type() const;
 	double get_Rate() const;
-	int get_Periods() const;
-	int get_Next() const;
+	double get_Periods() const;
+	double get_Next() const;
 
 
 	//*** Setter ***
 	void set_Type(int);
 	void set_Rate(double);
-	void set_Periods(int);
-	void set_Next(int);
+	void set_Periods(double);
+	void set_Next(double);
 
 };
 
@@ -49,7 +49,7 @@ protected:
 
 
 	//************** Basic features **************
-	int CurrentTime;
+	double CurrentTime;
 
 	double SpotPrice;
 
@@ -63,7 +63,7 @@ protected:
 public:
 	//************** Primary functions **************
 	asset();
-	asset(char AssetName[20], int CurrentTime, double SpotPrice, double Volatility, dividend Dividends);
+	asset(char AssetName[20], double CurrentTime, double SpotPrice, double Volatility, dividend Dividends);
 	asset(const asset&);
 	~asset();
 
@@ -71,14 +71,14 @@ public:
 	//************** Basic functions **************
 	//*** Getter ***
 	char* get_AssetName() const;
-	int get_CurrentTime() const;
+	double get_CurrentTime() const;
 	double get_SpotPrice() const;
 	double get_Volatility() const;
 	dividend get_Dividends() const;
 
 	//*** Setter ***
 	void set_AssetName(char Name[20]);
-	void set_CurrentTime(int);
+	void set_CurrentTime(double);
 	void set_SpotPrice(double);
 	void set_Volatility(double);
 	void set_Dividends(dividend);
@@ -86,8 +86,14 @@ public:
 
 	//************** Advanced functions **************
 
-	void Asset_Actualization(int NewTime, double SpotPrice);
-	asset Asset_Estimation(int Time, double RiskFreeRate) const;  
+	void Asset_Actualization(double NewTime, double SpotPrice);
+	asset Asset_Estimation(double Time, double RiskFreeRate) const;  
+
+
+	//************** Display overload **************
+
+	friend ostream& operator<<(ostream& output, const asset& Asset);
+	friend istream& operator>>(istream& input, asset& Asset);
 };
 
 
