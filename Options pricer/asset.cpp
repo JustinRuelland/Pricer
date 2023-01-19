@@ -145,13 +145,6 @@ void asset::set_Dividends(dividend Dividends){
 
 //Advanced functions
 
-int euclidian_division(double x, double y){
-	return x/y;
-}
-
-double modulo(double x, double y){
-	return x - (euclidian_division(x,y)*y);
-}
 
 void asset::Asset_Actualization(double NewTime, double SpotPrice){
 	double OldTime = this->CurrentTime;
@@ -176,10 +169,6 @@ void asset::Asset_Actualization(double NewTime, double SpotPrice){
 	}
 
 
-}
-
-int DividendCounter(double Delta, double Next, double Periods){
-	return euclidian_division(Delta + Periods - Next, Periods);
 }
 
 
@@ -211,6 +200,9 @@ asset asset::Asset_Estimation(double Time, double RiskFreeRate) const{
 	return AssetEstimate;
 }
 
+
+//************** Tools functions **************
+
 char* NameCopie(const char chaine[20]){
 	char* copie = new char[20];
 	bool bufferFull = true;
@@ -228,6 +220,17 @@ char* NameCopie(const char chaine[20]){
 	return copie;
 }
 
+int DividendCounter(double Delta, double Next, double Periods){
+	return euclidian_division(Delta + Periods - Next, Periods);
+}
+
+int euclidian_division(double x, double y){
+	return x/y;
+}
+
+double modulo(double x, double y){
+	return x - (euclidian_division(x,y)*y);
+}
 
 /*
 int main(int argc, char const *argv[])
