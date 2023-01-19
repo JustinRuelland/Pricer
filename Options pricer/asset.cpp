@@ -8,15 +8,15 @@
 dividend::dividend(){
 	this->Type = 0;
 	this->Rate = 0.0;
-	this->Periods = 0;
-	this->Next = 0;
+	this->Periods = 0.0;
+	this->Next = 0.0;
 }
 
-dividend::dividend(int DividendsType, double DividendsRate, int DividendsPeriods, int NextDividend){
+dividend::dividend(int DividendsType, double DividendsRate, double DividendsPeriods, double NextDividend){
 	this->Type = DividendsType;
 	this->Rate = DividendsRate;
 	this->Periods = DividendsPeriods;
-	this->Next = NextDividend%DividendsPeriods;
+	this->Next = modulo(NextDividend, DividendsPeriods);
 }
 
 dividend::dividend(const dividend& Div){
@@ -37,11 +37,11 @@ double dividend::get_Rate() const{
 	return Rate;
 }
 
-int dividend::get_Periods() const{
+double dividend::get_Periods() const{
 	return Periods;
 }
 
-int dividend::get_Next() const{
+double dividend::get_Next() const{
 	return Next;
 }
 
@@ -53,12 +53,12 @@ void dividend::set_Rate(double Rate){
 	this->Rate = Rate;
 }
 
-void dividend::set_Periods(int Periods){
+void dividend::set_Periods(double Periods){
 	this->Periods = Periods;
 }
 
-void dividend::set_Next(int Next){
-	this->Next = Next%this->Periods;
+void dividend::set_Next(double Next){
+	this->Next = modulo(Next, this->Periods);
 }
 
 
@@ -70,13 +70,13 @@ asset::asset(){
 	dividend Div;
 
 	this->AssetName = nullptr;
-	this->CurrentTime = 0;
+	this->CurrentTime = 0.0;
 	this->SpotPrice = 0.0;
 	this->Volatility = 0.0;
 	this->Dividends = Div;
 }
 
-asset::asset(char AssetName[20], int CurrentTime, double SpotPrice, double Volatility, dividend Dividends){
+asset::asset(char AssetName[20], double CurrentTime, double SpotPrice, double Volatility, dividend Dividends){
 	this->AssetName = NameCopie(AssetName);
 	this->CurrentTime = CurrentTime;
 	this->SpotPrice = SpotPrice;
@@ -103,7 +103,7 @@ char* asset::get_AssetName() const{
 	return AssetName;
 }
 
-int asset::get_CurrentTime() const{
+double asset::get_CurrentTime() const{
 	return CurrentTime;
 }
 
@@ -126,7 +126,7 @@ void asset::set_AssetName(char Name[20]){
 	AssetName = NameCopie(Name);
 }
 
-void asset::set_CurrentTime(int CurrentTime){
+void asset::set_CurrentTime(double CurrentTime){
 	this->CurrentTime = CurrentTime;
 }
 
@@ -145,20 +145,31 @@ void asset::set_Dividends(dividend Dividends){
 
 //Advanced functions
 
-void asset::Asset_Actualization(int NewTime, double SpotPrice){
-	int OldTime = this->CurrentTime;
+int euclidian_division(double x, double y){
+	return x/y;
+}
+
+double modulo(double x, double y){
+	return x - (euclidian_division(x,y)*y);
+}
+
+void asset::Asset_Actualization(double NewTime, double SpotPrice){
+	double OldTime = this->CurrentTime;
 
 	this->CurrentTime = NewTime;
 	this->SpotPrice = SpotPrice;
 
 	//Actualization of dividends
-	int OldNext = this->Dividends.get_Next();
-	int Periods = this->Dividends.get_Periods();
-	int Delta = NewTime - OldTime;
+	double OldNext = this->Dividends.get_Next();
+	double Periods = this->Dividends.get_Periods();
+	double Delta = NewTime - OldTime;
 
-	int NextDividend = (Periods - Delta%Periods + OldNext)%Periods;
 
-	if(NextDividend == 0){
+
+	//double NextDividend = (Periods - Delta%Periods + OldNext)%Periods;
+	double NextDividend = modulo((Periods - modulo(Delta, Periods) + OldNext),Periods);
+
+	if(NextDividend == 0.0){
 		this->Dividends.set_Next(Periods);
 	}else{
 		this->Dividends.set_Next(NextDividend);
@@ -167,28 +178,23 @@ void asset::Asset_Actualization(int NewTime, double SpotPrice){
 
 }
 
-int DividendCounter(int Delta, int Next, int Periods){
-	int counter = 0;
-	if(Delta >= Next){
-		Delta -= Next;
-		counter = Delta/Periods + 1;
-	}
-	return counter;
+int DividendCounter(double Delta, double Next, double Periods){
+	return euclidian_division(Delta + Periods - Next, Periods);
 }
 
 
 
-asset asset::Asset_Estimation(int Time, double RiskFreeRate) const{
+asset asset::Asset_Estimation(double Time, double RiskFreeRate) const{
 	asset AssetEstimate = *this;
 	// Computation of the expected spot price of the asset at time t=Time
 	// Following the dividends type, the pricing is different
 	dividend DivAsEs = AssetEstimate.get_Dividends();
 	int DivType = DivAsEs.get_Type();
 	double ExpectedPrice;
-	int OldTime = AssetEstimate.get_CurrentTime();
-	int Next = DivAsEs.get_Next();
+	double OldTime = AssetEstimate.get_CurrentTime();
+	double Next = DivAsEs.get_Next();
 	double DivRate = DivAsEs.get_Rate();
-	int Periods = DivAsEs.get_Periods();
+	double Periods = DivAsEs.get_Periods();
 	double PriceOldTime = AssetEstimate.get_SpotPrice();
 
 	if(DivType == 0){ 
@@ -226,7 +232,8 @@ char* NameCopie(const char chaine[20]){
 
 int main(int argc, char const *argv[])
 {
-	std::cout << 15/2 << std::endl;
+	std::cout << 15%6 << std::endl;
+	std::cout << DividendCounter(0.112, 0.10, 0.15) << std::endl;
 	return 0;
 }
 
