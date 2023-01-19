@@ -229,7 +229,7 @@ char* NameCopie(const char chaine[20]){
 }
 
 
-
+/*
 int main(int argc, char const *argv[])
 {
 	std::cout << 15%6 << std::endl;
@@ -237,7 +237,7 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
-
+*/
 
 
 
