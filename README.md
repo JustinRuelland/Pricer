@@ -29,7 +29,7 @@ Les fonctions membres classiques :
   - get_r
   - get_sigma
   - get_T
- - les *Setters* :
+- les *Setters* :
   - set_K
   - set_S
   - set_r
