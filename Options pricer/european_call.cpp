@@ -1,7 +1,9 @@
 #include <iostream>
 #include "european_call.h"
+#include "european_put.h"
 #include "cdf.h"
 #include <string>
+
 using namespace std;
 
 // Destructor
@@ -21,3 +23,13 @@ string european_call::type() const {
 	string name = "European call";
 	return name;
 };
+
+void european_call::replication() const {
+	european_put put(this->K, this->S, this->T, this->sigma);
+
+	cout << "The replication of the buy of this " << this->type() << ", which value is "<<this->price()<<", is : ";
+	cout << "\n * The buy on the same underlying asset of an " << put;
+	cout << "\n * The buy of the underlying asset.";
+	cout << "\n * The borrow of " << exp(-r * this->T) * K << " on the risk free rate market. ";
+	cout << "\n The balance of the replication is " << put.price() + this->S - exp(-r * this->T) * K << " (which is indeed equal to the spot price of the replicated option).\n\n\n";
+}

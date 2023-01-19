@@ -21,6 +21,7 @@ public :
 	//// Member functions
 	virtual double price() const = 0;
 	virtual string type() const = 0;
+	virtual void replication() const = 0;
 	
 	// Getter
 	double get_K() {return this->K;};

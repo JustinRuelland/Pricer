@@ -14,4 +14,5 @@ public:
 	// Member function
 	double price() const;
 	string type() const;
+	void replication() const;
 };

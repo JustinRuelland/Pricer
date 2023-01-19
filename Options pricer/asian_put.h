@@ -1,6 +1,7 @@
 #pragma once
 #include "option.h"
 
+
 class asian_put : public option {
 public:
 	// Constructors
@@ -14,4 +15,5 @@ public:
 	// Member function
 	double price() const;
 	string type() const;
+	void replication() const;
 };

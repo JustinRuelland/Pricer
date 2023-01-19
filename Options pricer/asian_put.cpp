@@ -42,3 +42,7 @@ string asian_put::type() const {
 	string name = "Asian put";
 	return name;
 }
+
+void asian_put::replication() const {
+	cout << "Replication not implemented in this program. (An " << this->type() << " is not easily replicable)." << endl;
+}

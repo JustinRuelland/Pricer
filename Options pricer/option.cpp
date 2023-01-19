@@ -16,11 +16,11 @@ option::option(option& o) {
 	this->S = o.S;
 	this->T = o.T;
 	this->sigma = o.sigma;
-}
+};
 
 // Overloading of the operators << and >> of iostream
 std::ostream& operator<<(std::ostream& output, const option& o) {
-	output << "Your option is an " << o.type() <<" with : " << "\n - Strike : " << o.K << "\n - Spot price : " << o.S << "\n - Maturity : " << o.T << " years" << "\n - Volatility : " << o.sigma << "\n - Risk free rate : " << option::get_r() * 100 << "%" << "\n\n - Price (Black-Scholes method) : " << o.price();
+	output << "an " << o.type() <<" with : " << "\n - Strike : " << o.K << "\n - Spot price : " << o.S << "\n - Maturity : " << o.T << " years" << "\n - Volatility : " << o.sigma << "\n - Risk free rate : " << option::get_r() * 100 << "%" << "\n - Price (Black-Scholes method) : " << o.price()<<"\n";
 	return output;
 };
 
