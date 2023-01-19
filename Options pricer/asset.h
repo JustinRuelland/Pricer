@@ -1,6 +1,7 @@
 #pragma once
 
 int DividendCounter(int Delta, int Next, int Periods);
+char* NameCopie(const char chaine[20]);
 
 class dividend {
 protected:
@@ -43,6 +44,10 @@ public:
 
 class asset {
 protected:
+	//Asset Name
+	char* AssetName; //We limit the AssetName at 19 characters
+
+
 	//************** Basic features **************
 	int CurrentTime;
 
@@ -56,22 +61,23 @@ protected:
 	dividend Dividends;
 
 public:
-
 	//************** Primary functions **************
 	asset();
-	asset(int CurrentTime, double SpotPrice, double Volatility, dividend Dividends);
+	asset(char AssetName[20], int CurrentTime, double SpotPrice, double Volatility, dividend Dividends);
 	asset(const asset&);
-	~asset(){};
+	~asset();
 
 
 	//************** Basic functions **************
 	//*** Getter ***
+	char* get_AssetName() const;
 	int get_CurrentTime() const;
 	double get_SpotPrice() const;
 	double get_Volatility() const;
 	dividend get_Dividends() const;
 
 	//*** Setter ***
+	void set_AssetName(char Name[20]);
 	void set_CurrentTime(int);
 	void set_SpotPrice(double);
 	void set_Volatility(double);
