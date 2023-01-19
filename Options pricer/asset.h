@@ -16,6 +16,7 @@ protected:
 	// The period between two dividend's payments for an asset with lump payment of dividends
 
 	double Next;
+	// Time before the next dividend's payment for an asset with lump payment of dividends
 
 public:
 	//************** Primary functions **************
