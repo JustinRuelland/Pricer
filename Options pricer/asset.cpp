@@ -69,13 +69,15 @@ void dividend::set_Next(int Next){
 asset::asset(){
 	dividend Div;
 
+	this->AssetName = nullptr;
 	this->CurrentTime = 0;
 	this->SpotPrice = 0.0;
 	this->Volatility = 0.0;
 	this->Dividends = Div;
 }
 
-asset::asset(int CurrentTime, double SpotPrice, double Volatility, dividend Dividends){
+asset::asset(char AssetName[20], int CurrentTime, double SpotPrice, double Volatility, dividend Dividends){
+	this->AssetName = NameCopie(AssetName);
 	this->CurrentTime = CurrentTime;
 	this->SpotPrice = SpotPrice;
 	this->Volatility = Volatility;
@@ -83,14 +85,23 @@ asset::asset(int CurrentTime, double SpotPrice, double Volatility, dividend Divi
 }
 
 asset::asset(const asset& Asset1){
+	this->AssetName = NameCopie(Asset1.AssetName);
 	this->CurrentTime = Asset1.CurrentTime;
 	this->SpotPrice = Asset1.SpotPrice;
 	this->Volatility = Asset1.Volatility;
 	this->Dividends = Asset1.Dividends;
 }
 
+asset::~asset(){
+	delete[] AssetName;
+}
+
 
 // Basic functions 
+
+char* asset::get_AssetName() const{
+	return AssetName;
+}
 
 int asset::get_CurrentTime() const{
 	return CurrentTime;
@@ -106,6 +117,13 @@ double asset::get_Volatility() const{
 
 dividend asset::get_Dividends() const{
 	return Dividends;
+}
+
+void asset::set_AssetName(char Name[20]){
+	if(AssetName != nullptr){
+		delete[] AssetName;
+	}
+	AssetName = NameCopie(Name);
 }
 
 void asset::set_CurrentTime(int CurrentTime){
@@ -185,6 +203,23 @@ asset asset::Asset_Estimation(int Time, double RiskFreeRate) const{
 
 	AssetEstimate.Asset_Actualization(Time, ExpectedPrice);
 	return AssetEstimate;
+}
+
+char* NameCopie(const char chaine[20]){
+	char* copie = new char[20];
+	bool bufferFull = true;
+	for(int i=0; i<19; i++){
+		copie[i] = chaine[i];
+
+		if(chaine[i] == '\0'){
+			bufferFull = false;
+			break;
+		}
+	}
+	if(bufferFull){
+		copie[19] = '\0';
+	}
+	return copie;
 }
 
 
