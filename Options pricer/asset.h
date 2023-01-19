@@ -2,6 +2,8 @@
 
 int DividendCounter(double Delta, double Next, double Periods);
 char* NameCopie(const char chaine[20]);
+int euclidian_division(double x, double y);
+double modulo(double x, double y);
 
 class dividend {
 protected:
@@ -92,9 +94,10 @@ public:
 
 
 	//************** Display overload **************
-
+	/*
 	friend ostream& operator<<(ostream& output, const asset& Asset);
 	friend istream& operator>>(istream& input, asset& Asset);
+	*/
 };
 
 
