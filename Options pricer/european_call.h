@@ -9,6 +9,7 @@ public :
 	european_call() {};
 	european_call(double K, double S, double T, double sigma) :option(K, S, T, sigma) {};
 	european_call(european_call& call) :option(call) {};
+	european_call(asset* ptr_underlying, double K, double T) : option(ptr_underlying, K, T) {};
 
 	// Destructor
 	~european_call() ;

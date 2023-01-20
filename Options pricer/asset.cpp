@@ -297,7 +297,7 @@ double modulo(double x, double y){
 }
 
 
-int main(int argc, char const *argv[])
+/*int main(int argc, char const* argv[])
 {
 	
 	char name[20];
@@ -315,7 +315,7 @@ int main(int argc, char const *argv[])
 	std::cout << Asset2 << std::endl;
 	return 0;
 }
-
+*/
 
 
 

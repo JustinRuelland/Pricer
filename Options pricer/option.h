@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "asset.h"
 using namespace std;
 
 class option {
@@ -10,6 +11,8 @@ protected :
 	double T = 0; // maturity (in years)
 	double sigma = 0; // volatility
 
+	asset* ptr_underlying;
+
 	static double r; // risk free rate
 
 public :
@@ -17,6 +20,7 @@ public :
 	option() {};
 	option(double K, double S, double T, double sigma);
 	option(option&);
+	option(asset* ptr_underlying, double K, double T);
 
 	//// Member functions
 	virtual double price() const = 0;

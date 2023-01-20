@@ -16,7 +16,17 @@ option::option(option& o) {
 	this->S = o.S;
 	this->T = o.T;
 	this->sigma = o.sigma;
+	this->ptr_underlying = o.ptr_underlying;
 };
+
+option::option(asset* ptr_underlying, double K, double T) {
+	this->K = K;
+	this->T = T;
+	this->ptr_underlying = ptr_underlying;
+
+	this->S = (*ptr_underlying).get_SpotPrice();
+	this->sigma = (*ptr_underlying).get_Volatility();
+}
 
 // Overloading of the operators << and >> of iostream
 std::ostream& operator<<(std::ostream& output, const option& o) {
