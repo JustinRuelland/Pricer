@@ -35,7 +35,7 @@ int main()
 	Asset1.set_Volatility(sigma);
 	Asset1.set_CurrentTime(0.0);
 
-	Asset1.get_alias_Dividends().set_Type(1);
+	Asset1.get_alias_Dividends().set_Type(2);
 	Asset1.get_alias_Dividends().set_Rate(0.0125);
 	Asset1.get_alias_Dividends().set_Periods(0.25);
 	Asset1.get_alias_Dividends().set_Next(0.1666);
@@ -45,8 +45,19 @@ int main()
 
 	std::cout << Asset1 << std::endl;
 
+
+	//Asset1.get_alias_Dividends().set_Rate(0.0);
 	std::cout << mon_call.price() << std::endl;
-	
+
+	//mon_call.replication(); //-> problèmes
+
+	asset Asset2(Asset1);
+
+	Asset2.get_alias_Dividends().set_Type(0);
+
+	asset* ptr_asset2 = &Asset2;
+	european_call mon_call2(ptr_asset2, K, T);
+	std::cout << mon_call2.price() << std:: endl;
 
 	return 0;
 }
