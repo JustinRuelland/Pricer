@@ -77,8 +77,8 @@ public:
 	double get_CurrentTime() const;
 	double get_SpotPrice() const;
 	double get_Volatility() const;
-	dividend& get_Dividends();
-	dividend read_Dividends() const;
+	dividend& get_alias_Dividends();
+	dividend get_Dividends() const;
 
 	//*** Setter ***
 	void set_AssetName(char Name[20]);
