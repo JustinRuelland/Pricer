@@ -1,5 +1,6 @@
 #include <iostream>
 #include "asset.h"
+#include <termcolor/termcolor.hpp>
 
 //************** Dividend functions **************
 
@@ -115,8 +116,12 @@ double asset::get_Volatility() const{
 	return Volatility;
 }
 
-dividend asset::get_Dividends() const{
-	return Dividends;
+dividend& asset::get_Dividends(){
+	return this->Dividends;
+}
+
+dividend asset::read_Dividends() const{
+	return this->Dividends;
 }
 
 void asset::set_AssetName(char Name[20]){
@@ -201,6 +206,38 @@ asset asset::Asset_Estimation(double Time, double RiskFreeRate) const{
 }
 
 
+//************** Display overload **************
+
+std::ostream& operator<<(std::ostream& output, const asset& Asset){
+	
+	char* Name;
+	if(Asset.AssetName != nullptr){
+		Name = Asset.AssetName;
+	}else{
+		char EmptyName = '\0';
+		Name = &EmptyName;
+	}
+	
+	output << "Asset : " << termcolor::bright_green << Name << "\n - Time (in years) : " << Asset.CurrentTime << "\n - SpotPrice : " << Asset.SpotPrice << "\n - Volatility : " << Asset.Volatility <<"\n";
+	
+	if(Asset.Dividends.get_Type() != 0){
+		dividend D = Asset.read_Dividends();
+		output << termcolor::blue << "===============\n" << "=  Dividends  =\n";
+		output << termcolor::blue << " - Rate : " << D.get_Rate() << " \n";
+		output << termcolor::blue << " - Periods (in years) : " << D.get_Periods() << " \n";
+		output << termcolor::blue << " - Next (in years) : " << D.get_Next() << " \n" << "===============";
+	}
+
+	output << termcolor::reset << std::endl;;
+	return output;
+}
+ /*
+std::istream& operator>>(std::istream& input, asset& Asset){
+	std::cout << " Asset Creation "
+}
+*/
+
+
 //************** Tools functions **************
 
 char* NameCopie(const char chaine[20]){
@@ -232,15 +269,23 @@ double modulo(double x, double y){
 	return x - (euclidian_division(x,y)*y);
 }
 
-/*
+
 int main(int argc, char const *argv[])
 {
-	std::cout << 15%6 << std::endl;
-	std::cout << DividendCounter(0.112, 0.10, 0.15) << std::endl;
+	
+	char name[20];
+	std::cin >> name; 
+	
+	asset Asset1;
+	Asset1.get_Dividends().set_Type(1);
+	
+	Asset1.set_AssetName(name);
+	
+	std::cout << Asset1 << std::endl;
 	return 0;
 }
 
-*/
+
 
 
 
