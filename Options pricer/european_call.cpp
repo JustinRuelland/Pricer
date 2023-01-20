@@ -22,11 +22,11 @@ double european_call::price() const {
 	}
 	if (((*ptr_underlying).get_alias_Dividends().get_Type() == 2)) {
 		double rate = (*ptr_underlying).get_alias_Dividends().get_Rate();
-		double K_for_computation = K * exp(rate*T);
+		double K_for_computation = K * exp(rate * T);
 
 		european_call call_for_computation(K_for_computation, S, T, sigma);
 
-		return exp(-rate*T)*call_for_computation.price();
+		return exp(-rate * T) * call_for_computation.price();
 	}
 	else{
 		double d_1 = (log(S / K) + (r + pow(sigma, 2) / 2) * T) / (sigma * sqrt(T));
