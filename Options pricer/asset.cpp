@@ -268,6 +268,7 @@ std::istream& operator>>(std::istream& input, asset& Asset){
 //************** Tools functions **************
 
 char* NameCopie(const char chaine[20]){
+	if (chaine == nullptr) { return nullptr; }
 	char* copie = new char[20];
 	bool bufferFull = true;
 	for(int i=0; i<19; i++){
