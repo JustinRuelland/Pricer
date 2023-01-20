@@ -9,14 +9,20 @@ european_put::~european_put() {};
 
 // Member function
 double european_put::price() const {
-	double K = this->K;
-	double S = this->S;
-	double T = this->T;
-	double sigma = this->sigma;
+	if (((*ptr_underlying).get_alias_Dividends().get_Type() == 1)) {
+		european_call equivalent_call(this->ptr_underlying, this->K, this->T);
+		int n = DividendCounter(this->T, (*ptr_underlying).get_alias_Dividends().get_Next(), (*ptr_underlying).get_alias_Dividends().get_Periods());
+		double S_hat = this->S * pow(1 - (*ptr_underlying).get_alias_Dividends().get_Rate(), n);
 
-	european_call equivalent_call(K, S, T, sigma);
+		return equivalent_call.price() + exp(-r * T) * K - S_hat;
+	}
+	else {
+		european_call equivalent_call(this->ptr_underlying, this->K, this->T);
+		double rate = (*ptr_underlying).get_alias_Dividends().get_Rate();
+		double S_hat = this->S * exp(-rate * this->T);
 
-	return equivalent_call.price() + exp(-r * T)*K-S;
+		return equivalent_call.price() + exp(-r * T) * K - S_hat; //We notice that if the rate is null, then we have the classical call-put parity.
+	}
 }
 
 string european_put::type() const {
