@@ -5,18 +5,29 @@
 #include <string>
 
 using namespace std;
+#include "asset.h"
 
 // Destructor
 european_call::~european_call() {};
 
 // Member function
 double european_call::price() const {
-	double d_1 = (log(S / K) + (r + pow(sigma, 2) / 2) * T) / (sigma * sqrt(T));
-	double d_2 = d_1 - sigma * sqrt(T);
+	if (((*ptr_underlying).get_alias_Dividends().get_Type() == 1)) {
+		int n = DividendCounter(this->T, (*ptr_underlying).get_alias_Dividends().get_Next(), (*ptr_underlying).get_alias_Dividends().get_Periods());
+		double S_hat = this->S*pow(1- (*ptr_underlying).get_alias_Dividends().get_Rate(),n);
+		
+		european_call call_for_computation(this->K, S_hat, this->T, this->sigma);
 
-	double V = S * cdf(d_1) - K * exp(-r * T) * cdf(d_2);
+		return call_for_computation.price();
+	}
+	else{
+		double d_1 = (log(S / K) + (r + pow(sigma, 2) / 2) * T) / (sigma * sqrt(T));
+		double d_2 = d_1 - sigma * sqrt(T);
 
-	return V;
+		double V = S * cdf(d_1) - K * exp(-r * T) * cdf(d_2);
+
+		return V;
+	}
 };
 
 string european_call::type() const {
