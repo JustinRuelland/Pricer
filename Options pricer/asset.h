@@ -77,7 +77,8 @@ public:
 	double get_CurrentTime() const;
 	double get_SpotPrice() const;
 	double get_Volatility() const;
-	dividend get_Dividends() const;
+	dividend& get_Dividends();
+	dividend read_Dividends() const;
 
 	//*** Setter ***
 	void set_AssetName(char Name[20]);
@@ -94,10 +95,10 @@ public:
 
 
 	//************** Display overload **************
-	/*
-	friend ostream& operator<<(ostream& output, const asset& Asset);
-	friend istream& operator>>(istream& input, asset& Asset);
-	*/
+	
+	friend std::ostream& operator<<(std::ostream& output, const asset& Asset);
+	friend std::istream& operator>>(std::istream& input, asset& Asset);
+	
 };
 
 
