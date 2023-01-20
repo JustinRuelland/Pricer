@@ -163,7 +163,7 @@ void asset::Asset_Actualization(double NewTime, double SpotPrice){
 	double Delta = NewTime - OldTime;
 
 
-
+	if(this->Dividends.get_Type() != 0){
 	//double NextDividend = (Periods - Delta%Periods + OldNext)%Periods;
 	double NextDividend = modulo((Periods - modulo(Delta, Periods) + OldNext),Periods);
 
@@ -171,6 +171,7 @@ void asset::Asset_Actualization(double NewTime, double SpotPrice){
 		this->Dividends.set_Next(Periods);
 	}else{
 		this->Dividends.set_Next(NextDividend);
+	}
 	}
 
 
@@ -242,11 +243,11 @@ std::ostream& operator<<(std::ostream& output, const asset& Asset){
 		Name = &EmptyName;
 	}
 	
-	output << "Asset : " << Name << "\n - Time (in years) : " << Asset.CurrentTime << "\n - SpotPrice : " << Asset.SpotPrice << "\n - Volatility : " << Asset.Volatility <<"\n";
+	output << "Asset : " << Name << "\n - Time (in years) : " << Asset.CurrentTime << "\n - SpotPrice : " << Asset.SpotPrice << "\n - Volatility : " << Asset.Volatility;
 
 	if(Asset.Dividends.get_Type() != 0){
 		dividend D = Asset.get_Dividends();
-		output << "===============\n" << "=  Dividends  =\n";
+		output << "\n===============\n" << "=  Dividends  =\n";
 		output << " - Rate : " << D.get_Rate() << " \n";
 		output << " - Periods (in years) : " << D.get_Periods() << " \n";
 		output << " - Next (in years) : " << D.get_Next() << " \n" << "===============";
@@ -307,7 +308,11 @@ int main(int argc, char const *argv[])
 	
 	Asset1.set_AssetName(name);
 	
-	std::cout << Asset1 << std::endl;
+	Asset1.set_SpotPrice(123.3);
+
+	asset Asset2 = Asset1.Asset_Estimation(100, 0.5);
+
+	std::cout << Asset2 << std::endl;
 	return 0;
 }
 
