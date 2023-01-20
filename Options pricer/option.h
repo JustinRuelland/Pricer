@@ -11,7 +11,9 @@ protected :
 	double T = 0; // maturity (in years)
 	double sigma = 0; // volatility
 
-	asset* ptr_underlying;
+
+	asset empty_asset;
+	asset* ptr_underlying = &empty_asset;
 
 	static double r; // risk free rate
 

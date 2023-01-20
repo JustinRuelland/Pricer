@@ -44,5 +44,12 @@ int main()
 
 	std::cout << Asset1 << std::endl;
 
+	asian_put ap(ptr_asset1, K, T);
+	//cout << ap.price() << endl;
+
+
+	//asian_put ap2(K,S, T,sigma);
+	//cout << ap2.price() << endl;
+
 	return 0;
 }
