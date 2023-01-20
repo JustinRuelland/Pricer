@@ -44,11 +44,11 @@ string european_call::type() const {
 };
 
 void european_call::replication() const {
-	european_put put(K, S, T, sigma);
+	european_put put(ptr_underlying, K, T);
 
 	cout << "The replication of the buy of this " << this->type() << ", which value is "<<this->price()<<", is : ";
-	cout << "\n * The buy on the same underlying asset of an " << put <<put.price();
-	cout << "\n * The buy of the underlying asset." << put.get_S();
+	cout << "\n * The buy on the same underlying asset of an " << put;
+	cout << "\n	* The buy of the underlying asset.";
 	cout << "\n * The borrow of " << exp(-r * T) * K << " on the risk free rate market. ";
 	cout << "\n The balance of the replication is " << put.price() + S - exp(-r * T) * K << " (which is indeed equal to the spot price of the replicated option).\n\n\n";
 }
