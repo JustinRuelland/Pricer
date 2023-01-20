@@ -1,6 +1,6 @@
 #include <iostream>
 #include "asset.h"
-#include <termcolor/termcolor.hpp>
+// #include <termcolor/termcolor.hpp>
 
 //************** Dividend functions **************
 
@@ -116,11 +116,11 @@ double asset::get_Volatility() const{
 	return Volatility;
 }
 
-dividend& asset::get_Dividends(){
+dividend& asset::get_alias_Dividends(){
 	return this->Dividends;
 }
 
-dividend asset::read_Dividends() const{
+dividend asset::get_Dividends() const{
 	return this->Dividends;
 }
 
@@ -207,7 +207,7 @@ asset asset::Asset_Estimation(double Time, double RiskFreeRate) const{
 
 
 //************** Display overload **************
-
+/*
 std::ostream& operator<<(std::ostream& output, const asset& Asset){
 	
 	char* Name;
@@ -219,7 +219,7 @@ std::ostream& operator<<(std::ostream& output, const asset& Asset){
 	}
 	
 	output << "Asset : " << termcolor::bright_green << Name << "\n - Time (in years) : " << Asset.CurrentTime << "\n - SpotPrice : " << Asset.SpotPrice << "\n - Volatility : " << Asset.Volatility <<"\n";
-	
+
 	if(Asset.Dividends.get_Type() != 0){
 		dividend D = Asset.read_Dividends();
 		output << termcolor::blue << "===============\n" << "=  Dividends  =\n";
@@ -231,6 +231,32 @@ std::ostream& operator<<(std::ostream& output, const asset& Asset){
 	output << termcolor::reset << std::endl;;
 	return output;
 }
+*/
+std::ostream& operator<<(std::ostream& output, const asset& Asset){
+	
+	char* Name;
+	if(Asset.AssetName != nullptr){
+		Name = Asset.AssetName;
+	}else{
+		char EmptyName = '\0';
+		Name = &EmptyName;
+	}
+	
+	output << "Asset : " << Name << "\n - Time (in years) : " << Asset.CurrentTime << "\n - SpotPrice : " << Asset.SpotPrice << "\n - Volatility : " << Asset.Volatility <<"\n";
+
+	if(Asset.Dividends.get_Type() != 0){
+		dividend D = Asset.get_Dividends();
+		output << "===============\n" << "=  Dividends  =\n";
+		output << " - Rate : " << D.get_Rate() << " \n";
+		output << " - Periods (in years) : " << D.get_Periods() << " \n";
+		output << " - Next (in years) : " << D.get_Next() << " \n" << "===============";
+	}
+
+	output << std::endl;;
+	return output;
+}
+
+
  /*
 std::istream& operator>>(std::istream& input, asset& Asset){
 	std::cout << " Asset Creation "
@@ -277,7 +303,7 @@ int main(int argc, char const *argv[])
 	std::cin >> name; 
 	
 	asset Asset1;
-	Asset1.get_Dividends().set_Type(1);
+	Asset1.get_alias_Dividends().set_Type(1);
 	
 	Asset1.set_AssetName(name);
 	
