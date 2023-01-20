@@ -7,7 +7,7 @@ But du programme : Dans le cadre du modèle de Black-Scholes :
 ### Hypothèses
 Laisser cette partie ?
 - *r* : le taux sans risque est constant,
-- ...
+- aucun affichage du programme ne présente une unité pour les prix : le programme donne de bons résultats tant que tous les prix sont utilisés avec la même devise.
 ## Architecture du programme
 ### Classe option
 Nous avons une classe abstraite nommée *option*. Nous avons définis trois paires de classes qui héritent de cette interface *option* :
