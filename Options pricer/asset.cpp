@@ -163,7 +163,7 @@ void asset::Asset_Actualization(double NewTime, double SpotPrice){
 	double Delta = NewTime - OldTime;
 
 
-	if(this->Dividends.get_Type() != 0){
+	if(this->Dividends.get_Type() != 0 && this->Dividends.get_Periods() != 0){
 	//double NextDividend = (Periods - Delta%Periods + OldNext)%Periods;
 	double NextDividend = modulo((Periods - modulo(Delta, Periods) + OldNext),Periods);
 
