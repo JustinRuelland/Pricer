@@ -15,9 +15,9 @@ double european_call::price() const {
 	double S = (*ptr_underlying).get_SpotPrice();
 	double sigma = (*ptr_underlying).get_Volatility();
 
-	// lump dividends
+	// -------------- Lump dividends --------------
 	if (((*ptr_underlying).get_alias_Dividends().get_Type() == 1)) {
-		int n = DividendCounter(T, (*ptr_underlying).get_alias_Dividends().get_Next(), (*ptr_underlying).get_alias_Dividends().get_Periods());
+		int n = DividendCounter(T, (*ptr_underlying).get_alias_Dividends().get_Next(), (*ptr_underlying).get_alias_Dividends().get_Periods()); // calculates the number of coupon detachments before the option's maturity
 		double S_hat = S*pow(1- (*ptr_underlying).get_alias_Dividends().get_Rate(),n);
 		
 		/* we need to commpue the price of an option,
@@ -33,7 +33,7 @@ double european_call::price() const {
 
 		return call_for_computation.price();
 	}
-	// continuous dividends
+	//----------- Continuous dividend ---------------
 	if (((*ptr_underlying).get_alias_Dividends().get_Type() == 2)) {
 		double rate = (*ptr_underlying).get_alias_Dividends().get_Rate();
 		double K_for_computation = K * exp(rate * T);
@@ -51,7 +51,7 @@ double european_call::price() const {
 
 		return exp(-rate * T) * call_for_computation.price();
 	}
-	// no dividend
+	// -------------- No dividend --------------------
 	else{
 		double d_1 = (log(S / K) + (r + pow(sigma, 2) / 2) * T) / (sigma * sqrt(T));
 		double d_2 = d_1 - sigma * sqrt(T);
@@ -68,13 +68,11 @@ string european_call::type() const {
 };
 
 void european_call::replication() const {
-	double S = (*ptr_underlying).get_SpotPrice();
-
 	european_put put(ptr_underlying, K, T);
 
 	cout << "The replication of the buy of this " << this->type() << ", which value is "<<this->price()<<", is : ";
 	cout << "\n * The buy on the same underlying asset of an " << put;
-	cout << "\n	* The buy of the underlying asset.";
+	cout << "\n * The buy of the underlying asset.";
 	cout << "\n * The borrow of " << exp(-r * T) * K << " on the risk free rate market. ";
-	cout << "\n The balance of the replication is " << put.price() + S - exp(-r * T) * K << " (which is indeed equal to the spot price of the replicated option).\n\n\n";
+	cout << "\n The balance of the replication is " << put.price() + (*ptr_underlying).get_SpotPrice() - exp(-r * T) * K << " (which is indeed equal to the spot price of the replicated option).\n\n\n";
 }

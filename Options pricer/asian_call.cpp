@@ -13,7 +13,7 @@ double asian_call::price() const {
 	double S = (*ptr_underlying).get_SpotPrice();
 	double sigma = (*ptr_underlying).get_Volatility();
 
-	if (((*ptr_underlying).get_alias_Dividends().get_Type() != 1) & ((*ptr_underlying).get_alias_Dividends().get_Type() != 2)) {
+	if ((*ptr_underlying).get_alias_Dividends().get_Type() == 0) {
 		double V = 0;
 		std::default_random_engine generator(time(0));
 		std::normal_distribution<double> distribution(0.0, 1.0);
