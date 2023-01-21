@@ -12,8 +12,8 @@ int main()
 
 	double K = 50.0;
 	double S = 40.0;
-	double T =0.5;
-	double sigma = 0.30;
+	double T =2;
+	double sigma = 0.30 ;
 	//european_call call1(K, S, T, sigma);
 
 	char name[20];
@@ -30,7 +30,7 @@ int main()
 	Asset1.set_Volatility(sigma);
 	Asset1.set_CurrentTime(0.0);
 
-	Asset1.get_alias_Dividends().set_Type(2);
+	Asset1.get_alias_Dividends().set_Type(1);
 	Asset1.get_alias_Dividends().set_Rate(0.0125);
 	Asset1.get_alias_Dividends().set_Periods(0.25);
 	Asset1.get_alias_Dividends().set_Next(0.1666);
@@ -40,28 +40,11 @@ int main()
 
 	std::cout << Asset1 << std::endl;
 
+	mon_call.replication();
+	european_put mon_put(ptr_asset1, K, T);
+	cout << mon_put.price() << endl;
+	mon_put.replication();
 
-	Asset1.get_alias_Dividends().set_Rate(0.0);
-	std::cout << mon_call.price() << std::endl;
-
-
-	asset Asset2(Asset1);
-
-	Asset2.get_alias_Dividends().set_Type(0);
-
-	asset* ptr_asset2 = &Asset2;
-	european_call mon_call2(ptr_asset2, K, T);
-	std::cout << mon_call2.price() << std:: endl;
-
-	cout << Asset1 << endl;
-	cout << Asset2 << endl;
-
-	mon_call2.replication();
-
-	european_put My_Put(ptr_asset2, K, T);
-	My_Put.replication();
-	cout << *ptr_asset2 << endl;
-	cout << "Le taux de dividendes de l'asset est : " << (*ptr_asset2).get_alias_Dividends().get_Rate() << endl;
-
+	
 	return 0;
 }
