@@ -1,14 +1,23 @@
 # Option's Pricer
-### But
-But du programme : Dans le cadre du modèle de Black-Scholes :
-- calcul du prix d'options (européennes, américaines et asiatiques sur sous-jacents sans dividendes ; )
-- affichage de la stratégies de réplication (pour des options européennes)
+### But du programme
+Dans le cadre du modèle de Black-Scholes :
+- calcul du prix d'options :
+  - européennes sur sous-jacent avec ou sans dividendes (utilisation des formules explicites du modèle de *Black-Scholes-Merton*),
+  - américaines (par la méthode de *Longstaff & Schwartz*),
+  - asiatiques (par méthode de *Monte-Carlo* directe),
+- affichage de la stratégie de réplication d'options (européennes sur sous-jacent avec ou sans dividendes - utilisation de la parité call-put)
 
-### Hypothèses
+### Conventions et hypothèses
 Laisser cette partie ?
 - *r* : le taux sans risque est constant,
 - aucun affichage du programme ne présente une unité pour les prix : le programme donne de bons résultats tant que tous les prix sont utilisés avec la même devise.
+
 ## Architecture du programme
+### Classe asset
+***A venir - @JR***
+Nous avons une classe *asset* pour les actifs financiers et une classe *dividends*. Nous utilisons une composition : une des variables membres de *asset* est de type *dividends*.
+
+
 ### Classe option
 Nous avons une classe abstraite nommée *option*. Nous avons définis trois paires de classes qui héritent de cette interface *option* :
 - **Options européennes** : 
@@ -21,10 +30,8 @@ Nous avons une classe abstraite nommée *option*. Nous avons définis trois pair
   - une classe *asian_call*,
   - une classe *asian_put*.
 
-Nous avons une classe *asset* pour les actifs financiers et une classe *dividends*. Nous utilisons une composition : une des variables membres de *asset* est de type *dividends*.
 
-### Classe asset
-***A venir - @JR***
+
 
 ## Fonctionnalités du programme
 ### Fonctions et variables membres
