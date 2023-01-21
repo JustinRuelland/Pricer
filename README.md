@@ -35,6 +35,7 @@ Nous avons une classe *asset* pour les actifs financiers et une classe *dividend
 - r : le taux sans risque,
 - sigma : la volatilité du sous-jacent,
 - T : la maturité de l'option.
+- ptr_underlying : pointeur vers un objet de la classe "*asset*"
 
 La variable *r* est un membre *statique* de la classe, car il doit être le même pour toutes les options, car c'est une caractéristique du marché et non de l'option seule.
 ##### Constructeurs et destructeurs
