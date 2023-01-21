@@ -9,6 +9,9 @@ european_put::~european_put() {};
 
 // Member function
 double european_put::price() const {
+	double S = (*ptr_underlying).get_SpotPrice();
+	double sigma = (*ptr_underlying).get_Volatility();
+
 	if (((*ptr_underlying).get_alias_Dividends().get_Type() == 1)) {
 		european_call equivalent_call(ptr_underlying, K, T);
 		int n = DividendCounter(T, (*ptr_underlying).get_alias_Dividends().get_Next(), (*ptr_underlying).get_alias_Dividends().get_Periods());
@@ -26,11 +29,13 @@ double european_put::price() const {
 }
 
 string european_put::type() const {
-	string name = "European put";
+	string name = "european put";
 	return name;
 }
 
 void european_put::replication() const {
+	double S = (*ptr_underlying).get_SpotPrice();
+
 	european_call call(ptr_underlying, K, T);
 
 	cout << "The replication of the buy of this " << this->type() << ", which value is " << this->price() << ", is : ";

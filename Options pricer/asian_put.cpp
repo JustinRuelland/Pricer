@@ -9,6 +9,8 @@ asian_put::~asian_put() {};
 // Member function
 double asian_put::price() const {
 	// to valuate an asian (arithmetic) put, we need to compute the average of the price (S_mean) of the underlying asset
+	double S = (*ptr_underlying).get_SpotPrice();
+	double sigma = (*ptr_underlying).get_Volatility();
 	if ( ((*ptr_underlying).get_alias_Dividends().get_Type()!=1)&((*ptr_underlying).get_alias_Dividends().get_Type() != 2)){
 		double V = 0;
 		std::default_random_engine generator(time(0));

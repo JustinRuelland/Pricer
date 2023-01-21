@@ -10,16 +10,11 @@ int main()
 {
 	std::cout << "Hello World!\n";
 
-	double K = 40.0;
+	double K = 50.0;
 	double S = 40.0;
 	double T =0.5;
 	double sigma = 0.30;
-	european_call call1(K, S, T, sigma);
-
-	european_call call2(call1);
-
-	std::cout << call1.price() << std::endl;
-
+	//european_call call1(K, S, T, sigma);
 
 	char name[20];
 	
@@ -46,10 +41,9 @@ int main()
 	std::cout << Asset1 << std::endl;
 
 
-	//Asset1.get_alias_Dividends().set_Rate(0.0);
+	Asset1.get_alias_Dividends().set_Rate(0.0);
 	std::cout << mon_call.price() << std::endl;
 
-	//mon_call.replication(); //-> problèmes
 
 	asset Asset2(Asset1);
 
@@ -58,6 +52,16 @@ int main()
 	asset* ptr_asset2 = &Asset2;
 	european_call mon_call2(ptr_asset2, K, T);
 	std::cout << mon_call2.price() << std:: endl;
+
+	cout << Asset1 << endl;
+	cout << Asset2 << endl;
+
+	mon_call2.replication();
+
+	european_put My_Put(ptr_asset2, K, T);
+	My_Put.replication();
+	cout << *ptr_asset2 << endl;
+	cout << "Le taux de dividendes de l'asset est : " << (*ptr_asset2).get_alias_Dividends().get_Rate() << endl;
 
 	return 0;
 }

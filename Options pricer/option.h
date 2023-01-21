@@ -7,11 +7,7 @@ using namespace std;
 class option {
 protected : 
 	double K = 0 ; // strike
-	double S = 0; // spot price
 	double T = 0; // maturity (in years)
-	double sigma = 0; // volatility
-
-
 	asset empty_asset;
 	asset* ptr_underlying = &empty_asset;
 
@@ -20,7 +16,6 @@ protected :
 public :
 	// Constructor
 	option() {};
-	option(double K, double S, double T, double sigma);
 	option(option&);
 	option(asset* ptr_underlying, double K, double T);
 
@@ -30,19 +25,18 @@ public :
 	virtual void replication() const = 0;
 	
 	// Getter
-	double get_K() {return this->K;};
-	double get_S() { return this->S; };
-	double get_T() { return this->T; };
-	double get_sigma() { return this->sigma; };
+	double get_K() const { return this->K; } ;
+	double get_T() const { return this->T; };
+	asset* get_ptr_underlying() const { return this->ptr_underlying; } ;
+	asset* get_allias_underlying() { return this->ptr_underlying; }; 
 
 	// Setter
 	void set_K(double K) { this->K = K; };
-	void set_S(double S) { this->S = S; };
 	void set_T(double T) { this->T = T; };
-	void set_sigma(double sigma) { this->sigma = sigma; };
+	void set_ptr_underlying(asset* ptr_underlying) { this->ptr_underlying = ptr_underlying; };
 
 	static void set_r(double r) { option::r = r; };
-	static double get_r() { return option::r; }
+	static double get_r() { return option::r; };
 
 	// Non-member function
 	friend ostream& operator<<(ostream& output, const option& o);

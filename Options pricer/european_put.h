@@ -7,7 +7,6 @@ class european_put : public option {
 public:
 	// Constructors
 	european_put();
-	european_put(double K, double S, double T, double sigma) :option(K, S, T, sigma) {};
 	european_put(european_put& put) :option(put) {};
 	european_put(asset* ptr_underlying, double K, double T) : option(ptr_underlying, K, T) {};
 
