@@ -13,6 +13,11 @@ Laisser cette partie ?
 - aucun affichage du programme ne présente une unité pour les prix : le programme donne de bons résultats tant que tous les prix sont utilisés avec la même devise.
 
 ## Architecture du programme
+### Diagramme de classes UML
+Choix de représentation :
+- les getter et setter pour chaque attribut des classes sont définis dans le code, nous ne les écrivons pas dans le diagramme de classe. 
+- Pareil pour le constructeur par défaut, par copie et le destructeur
+- 
 ### Classe asset
 ***A venir - @JR***
 Nous avons une classe *asset* pour les actifs financiers et une classe *dividends*. Nous utilisons une composition : une des variables membres de *asset* est de type *dividends*.
