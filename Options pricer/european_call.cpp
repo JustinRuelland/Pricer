@@ -20,7 +20,7 @@ double european_call::price() const {
 		int n = DividendCounter(T, (*ptr_underlying).get_alias_Dividends().get_Next(), (*ptr_underlying).get_alias_Dividends().get_Periods()); // calculates the number of coupon detachments before the option's maturity
 		double S_hat = S*pow(1- (*ptr_underlying).get_alias_Dividends().get_Rate(),n);
 		
-		/* we need to commpue the price of an option,
+		/* we need to compute the price of an option,
 		with the strike the same strike and the same maturity,
 		on an underlying with the spot price S_hat and the same volatility, but WITH NO DIVIDENDS*/
 
@@ -38,7 +38,7 @@ double european_call::price() const {
 		double rate = (*ptr_underlying).get_alias_Dividends().get_Rate();
 		double K_for_computation = K * exp(rate * T);
 
-		/* we need to commpute the price of an option, 
+		/* we need to compute the price of an option, 
 		with the strike "K_for_computation" and same maturity, 
 		on an underlying with the same spot price and volatility, but WITH NO DIVIDENDS*/
 
