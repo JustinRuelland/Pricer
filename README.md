@@ -19,7 +19,7 @@ Choix de représentation :
 - les Getter et Setter pour chaque attribut des classes sont bien définis dans le code, nous ne les écrivons pas dans le diagramme de classe. 
 - Pareil pour le constructeur par défaut, par copie et le destructeur
 
-[INSERER IMAGE]
+![DiagramUML.png]
 
 Légende du diagramme de classe UML:
 - La flèche indique un héritage. La classe mère de l'héritage est pointée par la flèche.
