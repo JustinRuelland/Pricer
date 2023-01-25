@@ -1,0 +1,2 @@
+C:\Users\louis\Pricer\Options pricer\x64\Debug\Options pricer.exe
+C:\Users\louis\Desktop\Pricer\Pricer\Options pricer\x64\Debug\Options_pricer.exe
