@@ -66,6 +66,7 @@ void dividend::set_Next(double Next){
 //************** Asset functions **************
 
 // Primary functions
+double asset::r = 0.05;
 
 asset::asset(){
 	dividend Div;
@@ -124,6 +125,9 @@ dividend asset::get_Dividends() const{
 	return this->Dividends;
 }
 
+static double asset::get_r() const{ return asset::r; };
+
+
 void asset::set_AssetName(char Name[20]){
 	if(AssetName != nullptr){
 		delete[] AssetName;
@@ -146,7 +150,7 @@ void asset::set_Volatility(double Volatility){
 void asset::set_Dividends(dividend Dividends){
 	this->Dividends = Dividends;
 }
-
+static void asset::set_r(double r) { asset::r = r; };
 
 //Advanced functions
 

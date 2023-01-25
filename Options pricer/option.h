@@ -11,8 +11,6 @@ protected :
 	asset empty_asset;
 	asset* ptr_underlying = &empty_asset;
 
-	static double r; // risk free rate
-
 public :
 	// Constructor
 	option() {};
@@ -35,8 +33,7 @@ public :
 	void set_T(double T) { this->T = T; };
 	void set_ptr_underlying(asset* ptr_underlying) { this->ptr_underlying = ptr_underlying; };
 
-	static void set_r(double r) { option::r = r; };
-	static double get_r() { return option::r; };
+
 
 	// Non-member function
 	friend ostream& operator<<(ostream& output, const option& o);

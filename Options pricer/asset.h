@@ -20,6 +20,7 @@ protected:
 	double Next;
 	// Time before the next dividend's payment for an asset with lump payment of dividends
 
+	static double r; // risk free rate
 public:
 	//************** Primary functions **************
 	dividend();
@@ -34,13 +35,14 @@ public:
 	double get_Rate() const;
 	double get_Periods() const;
 	double get_Next() const;
-
+	static double get_r() const;
 
 	//*** Setter ***
 	void set_Type(int);
 	void set_Rate(double);
 	void set_Periods(double);
 	void set_Next(double);
+	static void set_r(double r);
 
 };
 

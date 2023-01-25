@@ -8,7 +8,7 @@
 
 int main()
 {
-	std::cout << "Hello World!\n";
+	std::cout << "Hello World!fef\n";
 
 	double K = 50.0;
 	double S = 40.0;
@@ -24,7 +24,7 @@ int main()
 	// std::cout << "Enter the name of your asset : ";
 	// std::cin >> name;
 	// Asset1.set_AssetName(name);
-	option::set_r(0.09);
+	asset::set_r(0.09);
 
 	Asset1.set_SpotPrice(S);
 	Asset1.set_Volatility(sigma);
@@ -44,7 +44,7 @@ int main()
 	european_put mon_put(ptr_asset1, K, T);
 	cout << mon_put.price() << endl;
 	mon_put.replication();
-
+	cout << asset::get_r() << endl;
 	
 	return 0;
 }
