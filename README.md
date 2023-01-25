@@ -1,5 +1,5 @@
 # Option's Pricer
-## Idées générales
+## I. Introduction
 ### But du programme
 Dans le cadre du modèle de Black-Scholes :
 - calcul du prix d'options :
@@ -8,12 +8,13 @@ Dans le cadre du modèle de Black-Scholes :
   - asiatiques (par méthode de *Monte-Carlo*),
 - affichage de la stratégie de réplication d'options (européennes sur sous-jacent avec ou sans dividendes - utilisation de la parité call-put)
 
+Les formules maéthématiques utilisées sont explicitées à la fin du README.
 ### Conventions et hypothèses
 Quelques hypothèses importantes optées pour notre programme ;
 - *r* : le taux sans risque est constant,
 - aucun affichage du programme ne présente une unité pour les prix : le programme donne de bons résultats tant que tous les prix sont utilisés avec la même devise.
 
-## Architecture du programme
+## II. Architecture du programme
 ### Vue d'ensemble de l'architecture: Diagramme de classes UML
 Choix de représentation :
 - les Getter et Setter pour chaque attribut des classes sont bien définis dans le code, nous ne les écrivons pas dans le diagramme de classe. 
@@ -64,7 +65,7 @@ Nous avons définis trois paires de classes qui héritent de cette interface *op
   - une classe *asian_call*,
   - une classe *asian_put*.
 
-## Fonctionnalités du programme
+## III. Fonctionnalités du programme
 ### Fonctions
 Les fonctions suivantes ont été implémentées pour toutes les classes du programme.
 
@@ -96,7 +97,7 @@ Les fonctions membres spécifiques sont toutes des fonction purement virtuelles,
 - replication() : qui affiche comment répliquer l'option (Nous ne savons pas répliquer des options autres qu'européennes, donc nous avons renvoyé un message d'avertissement pour les autres options.)
 
 
-## Critique des problèmes rencontrés et des solutions adoptées
+## IV. Critique des problèmes rencontrés et des solutions adoptées
 ### Organisation d'un programme de grande ambition
 La classe option (et ce qui en hérite), d'un côté, et la classe asset (et la classe dividend ), d'un autre, ont été codé par deux personnes. Nous avions réalisé des rendez-vous réguliers pour se mettre d'accord comment coder et aborder le programme, mais lorsqu'il était venu d'utiliser la classe asset dans la classe option (afin de valoriser des options sur sous-jacents avec dividendes), nous nous sommes rendus comptes de petites spécificités à nos deux manières de coder que nous n'avions pas anticipées. 
 
@@ -108,8 +109,8 @@ Problème :
 
 Solution : création de la fonction membre de asset `get_alias_dividend` un "getter" non standard. Le getter n'est pas de type `const`. Cela permet alors depuis l'asset accéder à dividend.
 
-# Méthodologie de pricing
-## Les notations
+## V. Méthodologie de pricing
+### Les notations
 On note de manière classique dans le cadre d'un modèle Black-Scholes :
 - K : le *strike* de l'option,
 - S : le *spot price* du sous-jacent,
@@ -122,8 +123,8 @@ Pour les options avec dividendes :
 - $\delta$ : le taux de dividendes.
 - $n$ : [pour des lump payments] nombre de détachements de dividendes durant la détention de l'option
 
-## Formules utilisées
-### European options
+### Formules utilisées
+#### European options
 - European sans dividendes
   - call : formule de Black-Scholes : $c=SN(d_{1})-e^{-rT}N(d_{2})$
     - où : $N(.)$ est la fonction de répartition de $\mathcal{N}(0,1)$
@@ -140,11 +141,11 @@ Pour les options avec dividendes :
   - Remarque : dans le code, j'ai nommé S_hat $=e^{-\delta T}S_{0}$
 
 
-### Asian options
+#### Asian options
 On note $\bar{S}= \frac{1}{T}\int\limits_{0}^{T}S_{t}dt$
   - call : $V_{T}=(\bar{S}-K)^{+}$
   - put : $V_{T}=(\bar{S}-K)^{-}$
 
 
-### American
+#### American
 **JR**
