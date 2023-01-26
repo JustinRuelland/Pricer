@@ -143,8 +143,8 @@ Pour les options avec dividendes :
   - Remarque : dans le code, j'ai nommé S_hat $=e^{-\delta T}S_{0}$
 
 - European lump payment dividend : 
-  - call : $c_{lump\; payments}=c((1-\delta)^{n}S_{0},\sigma,T,K)$
-  - put : $c_{lump\;payments}-p_{lump\; payments}=(1-\delta)^{n}S_{0}-e^{-rT}K$
+  - call : $c_{lump payments}=c((1-\delta)^{n}S_{0},\sigma,T,K)$
+  - put : $c_{lump payments}-p_{lump payments}=(1-\delta)^{n}S_{0}-e^{-rT}K$
   - Remarque : dans le code, j'ai nommé S_hat $=e^{-\delta T}S_{0}$
 
 
