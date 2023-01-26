@@ -53,7 +53,7 @@ double european_call::price() const {
 	}
 	// -------------- No dividend --------------------
 	else{
-		double d_1 = (log(S / K) + (r + pow(sigma, 2) / 2) * T) / (sigma * sqrt(T));
+		double d_1 = (log(S / K) + (asset::get_r() + pow(sigma, 2) / 2) * T) / (sigma * sqrt(T));
 		double d_2 = d_1 - sigma * sqrt(T);
 
 		double V = S * cdf(d_1) - K * exp(-asset::get_r() * T) * cdf(d_2);
@@ -76,8 +76,8 @@ void european_call::replication() const {
 		cout << "The replication of the buy of this " << this->type() << ", which value is " << this->price() << ", is : ";
 		cout << "\n * The buy on the same underlying asset of an " << put;
 		cout << "\n * The buy of the underlying asset.";
-		cout << "\n * The borrow of " << exp(-r * T) * K << " on the risk free rate market. ";
-		cout << "\n The balance of the replication is " << put.price() + (*ptr_underlying).get_SpotPrice() - exp(-r * T) * K << " (which is indeed equal to the spot price of the replicated option).\n\n\n";
+		cout << "\n * The borrow of " << exp(-asset::get_r() * T) * K << " on the risk free rate market. ";
+		cout << "\n The balance of the replication is " << put.price() + (*ptr_underlying).get_SpotPrice() - exp(-asset::get_r() * T) * K << " (which is indeed equal to the spot price of the replicated option).\n\n\n";
 	}
 	// ------------ continuous dividends ----------------
 	if ((*ptr_underlying).get_alias_Dividends().get_Type() == 2) {
@@ -86,8 +86,8 @@ void european_call::replication() const {
 		cout << "The replication of the buy of this " << this->type() << ", which value is " << this->price() << ", is : ";
 		cout << "\n * The buy on the same underlying asset of an " << put;
 		cout << "\n * The buy of the underlying asset.";
-		cout << "\n * The borrow of " << exp(-r * T) * K + (*ptr_underlying).get_SpotPrice() * (1 - exp(-rate * T)) << " on the risk free rate market. ";
-		cout << "\n The balance of the replication is " << put.price() + (*ptr_underlying).get_SpotPrice() -( exp(-r * T) * K + (*ptr_underlying).get_SpotPrice() * (1 - exp(-rate * T))) << " (which is indeed equal to the spot price of the replicated option).\n\n\n";
+		cout << "\n * The borrow of " << exp(-asset::get_r() * T) * K + (*ptr_underlying).get_SpotPrice() * (1 - exp(-rate * T)) << " on the risk free rate market. ";
+		cout << "\n The balance of the replication is " << put.price() + (*ptr_underlying).get_SpotPrice() -( exp(-asset::get_r() * T) * K + (*ptr_underlying).get_SpotPrice() * (1 - exp(-rate * T))) << " (which is indeed equal to the spot price of the replicated option).\n\n\n";
 	}
 	// ------------ continuous dividends ----------------
 	else {
@@ -97,8 +97,8 @@ void european_call::replication() const {
 		cout << "The replication of the buy of this " << this->type() << ", which value is " << this->price() << ", is : ";
 		cout << "\n * The buy on the same underlying asset of an " << put;
 		cout << "\n * The buy of the underlying asset.";
-		cout << "\n * The borrow of " << exp(-r * T) * K + (*ptr_underlying).get_SpotPrice() * (1 - pow(1 - rate, n)) << " on the risk free rate market. ";
-		cout << "\n The balance of the replication is " << put.price() + (*ptr_underlying).get_SpotPrice() - (exp(-r * T) * K + (*ptr_underlying).get_SpotPrice() * (1 - pow(1 - rate, n))) << " (which is indeed equal to the spot price of the replicated option).\n\n\n";
+		cout << "\n * The borrow of " << exp(-asset::get_r() * T) * K + (*ptr_underlying).get_SpotPrice() * (1 - pow(1 - rate, n)) << " on the risk free rate market. ";
+		cout << "\n The balance of the replication is " << put.price() + (*ptr_underlying).get_SpotPrice() - (exp(-asset::get_r() * T) * K + (*ptr_underlying).get_SpotPrice() * (1 - pow(1 - rate, n))) << " (which is indeed equal to the spot price of the replicated option).\n\n\n";
 	}
 	
 	}

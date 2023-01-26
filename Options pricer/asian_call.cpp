@@ -30,7 +30,7 @@ double asian_call::price() const {
 				double delta_W = distribution(generator) * sqrt(T / n); // because W_{t+h}-W_{t} follows N(0,h)
 
 				W += delta_W;
-				S_mean += S * exp((r - pow(sigma, 2) / 2) * T + sigma * W) / n;
+				S_mean += S * exp((asset::get_r() - pow(sigma, 2) / 2) * T + sigma * W) / n;
 			};
 
 			if (S_mean > K) {
