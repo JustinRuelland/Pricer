@@ -1,4 +1,11 @@
 # Option's Pricer
+Plan :
+- I. Introduction
+- II. Architecture du programme
+- III. Fonctionnalité du programme
+- IV. Critique des problèmes rencontrés et des solutions adoptées
+- V. Méthodologie de pricing
+ 
 ## I. Introduction
 ### But du programme
 Dans le cadre du modèle de Black-Scholes :
@@ -8,7 +15,7 @@ Dans le cadre du modèle de Black-Scholes :
   - asiatiques (par méthode de *Monte-Carlo*),
 - affichage de la stratégie de réplication d'options (européennes sur sous-jacent avec ou sans dividendes - utilisation de la parité call-put)
 
-Les formules maéthématiques utilisées sont explicitées à la fin du README.
+Les formules mathématiques utilisées sont explicitées à la fin du README.
 ### Conventions et hypothèses
 Quelques hypothèses importantes optées pour notre programme ;
 - *r* : le taux sans risque est constant,
@@ -81,7 +88,7 @@ Les fonctions membres classiques :
 - les *Setters*,
 
 #### Fonctions non-membres
-Nous avons surchargé les opérateurs de iostream ">>" et "<<" pour toutes qui héritent de la classe *option* et les *asset*.
+Nous avons surchargé les opérateurs de iostream ">>" et "<<" pour les classes *option* et *asset*.
 
 ### Fonctions spécifiques aux classes
 #### Classe asset
