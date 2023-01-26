@@ -110,7 +110,7 @@ Problème :
 Solution : création de la fonction membre de asset `get_alias_dividend` un "getter" non standard. Le getter n'est pas de type `const`. Cela permet alors depuis l'asset accéder à dividend.
 
 ## V. Méthodologie de pricing
-### Les notations
+### Notations
 On note de manière classique dans le cadre d'un modèle Black-Scholes :
 - K : le *strike* de l'option,
 - S : le *spot price* du sous-jacent,
