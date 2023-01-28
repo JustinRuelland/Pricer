@@ -6,6 +6,10 @@ Options\pricer/x64/**
 *.vcxproj
 *.filters
 *.user
+*.idp
+*pdb
+Options\pricer/myprog
+Options\pricer/depend-myprog
 
 *.o
 
