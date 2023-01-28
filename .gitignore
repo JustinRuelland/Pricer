@@ -2,8 +2,12 @@ Options\pricer/x64/**
 **/.vs
 **.log
 *.tlog
+*.sln
+*.vcxproj
+*.filters
+*.user
 
-
+*.o
 
 .DS_Store
 test
