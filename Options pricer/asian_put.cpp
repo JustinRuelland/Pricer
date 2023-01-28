@@ -1,6 +1,7 @@
 #include "asian_put.h"
 #include<random>
 #include <string>
+#include <cmath>
 using namespace std;
 
 // Destructor
@@ -11,6 +12,8 @@ double asian_put::price() const {
 	// to valuate an asian (arithmetic) put, we need to compute the average of the price (S_mean) of the underlying asset
 	double S = (*ptr_underlying).get_SpotPrice();
 	double sigma = (*ptr_underlying).get_Volatility();
+	double r = (*ptr_underlying).get_r();
+
 	if ( ((*ptr_underlying).get_alias_Dividends().get_Type()!=1)&((*ptr_underlying).get_alias_Dividends().get_Type() != 2)){
 		double V = 0;
 		std::default_random_engine generator(time(0));
@@ -28,7 +31,7 @@ double asian_put::price() const {
 				double delta_W = distribution(generator) * sqrt(T / n); // because W_{t+h}-W_{t} follows N(0,h)
 
 				W += delta_W;
-				S_mean += S * exp((asset::get_r() - pow(sigma, 2) / 2) * T + sigma * W) / n;
+				S_mean += S * exp((r - pow(sigma, 2) / 2) * T + sigma * W) / n;
 			};
 
 			if (K > S_mean) {

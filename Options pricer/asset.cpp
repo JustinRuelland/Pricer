@@ -1,5 +1,6 @@
 #include <iostream>
 #include "asset.h"
+#include <cmath>
 // #include <termcolor/termcolor.hpp>
 
 //************** Dividend functions **************
@@ -125,7 +126,7 @@ dividend asset::get_Dividends() const{
 	return this->Dividends;
 }
 
-static double asset::get_r() const{ return asset::r; };
+double asset::get_r() { return r; };
 
 
 void asset::set_AssetName(char Name[20]){
@@ -150,7 +151,7 @@ void asset::set_Volatility(double Volatility){
 void asset::set_Dividends(dividend Dividends){
 	this->Dividends = Dividends;
 }
-static void asset::set_r(double r) { asset::r = r; };
+void asset::set_r(double r) { asset::r = r; };
 
 //Advanced functions
 

@@ -21,8 +21,9 @@ std::ostream& operator<<(std::ostream& output, const option& o) {
 	asset* ptr_underlying = o.get_ptr_underlying();
 	double S = (*ptr_underlying).get_SpotPrice();
 	double sigma = (*ptr_underlying).get_Volatility();
+	double r = (*ptr_underlying).get_r();
 
-	output << "an " << o.type() <<" with : " << "\n	- Strike : " << o.K << "\n	- Spot price : " << S << "\n	- Maturity : " << o.T << " years" << "\n	- Volatility : " << sigma << "\n	- Risk free rate : " << option::get_r() * 100 << "%" << "\n	- Price (Black-Scholes method) : " << o.price()<<"\n";
+	output << "an " << o.type() <<" with : " << "\n	- Strike : " << o.K << "\n	- Spot price : " << S << "\n	- Maturity : " << o.T << " years" << "\n	- Volatility : " << sigma << "\n	- Risk free rate : " << r * 100 << "%" << "\n	- Price (Black-Scholes method) : " << o.price()<<"\n";
 	return output;
 };
 

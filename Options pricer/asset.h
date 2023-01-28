@@ -20,7 +20,6 @@ protected:
 	double Next;
 	// Time before the next dividend's payment for an asset with lump payment of dividends
 
-	static double r; // risk free rate
 public:
 	//************** Primary functions **************
 	dividend();
@@ -35,14 +34,12 @@ public:
 	double get_Rate() const;
 	double get_Periods() const;
 	double get_Next() const;
-	static double get_r() const;
 
 	//*** Setter ***
 	void set_Type(int);
 	void set_Rate(double);
 	void set_Periods(double);
 	void set_Next(double);
-	static void set_r(double r);
 
 };
 
@@ -60,10 +57,12 @@ protected:
 
 	double Volatility;
 
+	static double r; // risk free rate
 
 	//************** Dividends feature **************
 
 	dividend Dividends;
+
 
 public:
 	//************** Primary functions **************
@@ -81,6 +80,7 @@ public:
 	double get_Volatility() const;
 	dividend& get_alias_Dividends();
 	dividend get_Dividends() const;
+	double get_r();
 
 	//*** Setter ***
 	void set_AssetName(char Name[20]);
@@ -88,6 +88,8 @@ public:
 	void set_SpotPrice(double);
 	void set_Volatility(double);
 	void set_Dividends(dividend);
+	void set_r(double r);
+
 
 
 	//************** Advanced functions **************
