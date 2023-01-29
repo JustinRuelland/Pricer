@@ -8,8 +8,7 @@ class option {
 protected : 
 	double K = 0 ; // strike
 	double T = 0; // maturity (in years)
-	asset empty_asset;
-	asset* ptr_underlying = &empty_asset;
+	asset* ptr_underlying = nullptr;
 
 public :
 	// Constructor
