@@ -49,6 +49,7 @@ LDLIBS =
 all: ${PROG}
 
 run: ${PROG}
+#	valgrind --tool=memcheck --leak-check=full --leak-resolution=med --show-reachable=yes ./${PROG}
 	./${PROG}
 
 ${PROG}: depend-${PROG} ${OBJETS}

@@ -12,7 +12,7 @@ int main()
 
 	double K = 50.0;
 	double S = 40.0;
-	double T =2;
+	double T = 2;
 	double sigma = 0.30 ;
 	//european_call call1(K, S, T, sigma);
 
@@ -21,10 +21,10 @@ int main()
 	asset Asset1;
 
 	//// Naming of the asset
-	// std::cout << "Enter the name of your asset : ";
-	// std::cin >> name;
-	// Asset1.set_AssetName(name);
-	Asset1.set_r(0.09);
+	std::cout << "Enter the name of your asset : ";
+	std::cin >> name;
+	Asset1.set_AssetName(name);
+	Asset1.set_r(0.05);
 
 	Asset1.set_SpotPrice(S);
 	Asset1.set_Volatility(sigma);
@@ -36,15 +36,19 @@ int main()
 	Asset1.get_alias_Dividends().set_Next(0.1666);
 
 	asset* ptr_asset1 =&Asset1;
+	std::cout << Asset1 << std::endl;
 	european_call mon_call(ptr_asset1, K, T);
 
-	std::cout << Asset1 << std::endl;
+	
 
 	mon_call.replication();
 	european_put mon_put(ptr_asset1, K, T);
 	cout << mon_put.price() << endl;
 	mon_put.replication();
 	cout << (*ptr_asset1).get_r() << endl;
+
+	asian_put mon_asiat(ptr_asset1, K, T);
+	cout << mon_asiat.price() << endl;
 	
 	return 0;
 }

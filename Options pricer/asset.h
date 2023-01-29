@@ -57,7 +57,7 @@ protected:
 
 	double Volatility;
 
-	static double r; // risk free rate
+	static double r ; // risk free rate
 
 	//************** Dividends feature **************
 

@@ -3,6 +3,8 @@
 #include "asset.h"
 using namespace std;
 
+option::~option() {}
+
 // Constructors
 option::option(option& o) {
 	this->K = o.K;

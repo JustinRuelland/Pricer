@@ -96,7 +96,7 @@ asset::asset(const asset& Asset1){
 }
 
 asset::~asset(){
-	delete[] AssetName;
+	if(AssetName != nullptr){ delete[] AssetName; }
 }
 
 
