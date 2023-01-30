@@ -13,11 +13,10 @@
 int main()
 {
 	std::cout << "Hello World!fef\n";
-
-	double K = 60.0;
-	double S = 60.0;
+	double K = 50.0;
+	double S = 100.0;
 	double T = 1;
-	double sigma = 0.1 ;
+	double sigma = 0.30;
 	//european_call call1(K, S, T, sigma);
 
 	char name[20];
@@ -68,20 +67,18 @@ int main()
 	// Test lookback
 	double m = 90;
 	double M = 110;
-	K = 50.0;
-	S = 100.0;
-	T = 1;
-	sigma = 0.30;
+
 	european_lookback_call mon_lookback_c(ptr_asset1, K, T, m);
 	european_lookback_put mon_lookback_p(ptr_asset1, K, T, M);
 
 	cout << "Risk Free Rate :" << endl;
 	cout << (*ptr_asset1).get_r() << endl;
-	cout << "Min spot:" << endl;
-	cout << m << endl;
-	cout << "Max spot:" << endl;
-	cout << M << endl;
+
 	std::cout << Asset1 << std::endl;
+
+	cout << mon_lookback_c << endl;
+	cout << "Min spot:" << m << endl;
+	cout << "Max spot:"<< M << endl;
 	cout << "Lookback Call Price:" << endl;
 	cout << mon_lookback_c.price() << endl;
 	cout << "Lookback Put Price:" << endl;
