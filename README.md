@@ -32,8 +32,8 @@ Choix de représentation :
 Légende du diagramme de classe UML:
 - La flèche indique un héritage. La classe mère de l'héritage est pointée par la flèche.
 - Les traits avec un losange indique :
-  - pour un losange noir : une relation de composition (le losange est de l'agrégat)
-  - pour un losange creux : une relation d'agrégation (le losange ets du côté de l'objet qui est ag)
+  - pour un losange noir : une relation de composition (Le losange est du côté de l'objet qui est composé par l'autre objet. Comme c'est une relation de composition, la destruction de l'objet composé détruit l'objet composant.)
+  - pour un losange creux : une relation d'agrégation (le losange est du côté de l'objet agrégat. Comme c'est une relation d'agrégation, la destruction de l'objet agrégat ne détruit pas l'objet agrégé.)
 
 ### Classe asset
 Nous avons une classe **asset** pour les actifs financiers.
@@ -42,6 +42,7 @@ Les variables membres de la classe *asset* sont :
 - CurrentTime : la date à laquelle est évaluée l'actif,
 - SpotPrice : le prix spot de l'actif,
 - Volatility : la volatilité de l'action,
+- r : le taux sans risque (c'est un membre statique de la classe, car il doit être le même pour tous les asset),
 - Dividends : les dividendes futures de l'actif, qui est un objet de la classe dividend.
 
 La classe **dividend** est une classe agrégée à la classe *asset*.
@@ -88,7 +89,7 @@ Les fonctions membres classiques :
 - les *Setters*,
 
 #### Fonctions non-membres
-Nous avons surchargé les opérateurs de iostream ">>" et "<<" pour les classes *option* et *asset*.
+Nous avons surchargé les opérateurs de iostream ">>" et "<<" pour les classes *option* et *asset* (les classes d'options gap et lookback ont été implémenté par deux membres du groupe en dernière minute et ne bénéficient pas d'un affichage aproprié de leur caractéristique. Par exemple, pour une gap option, le trigger price $k$ se s'affiche pas avec l'opérateur <<. Pour le connaître, il faut utiliser le getter get_k().)
 
 ### Fonctions spécifiques aux classes
 #### Classe asset
@@ -115,6 +116,33 @@ Fort de cette expérience, nous en concluons que nous devrons pour un prochain p
 Problème :
 
 Solution : création de la fonction membre de asset `get_alias_dividend` un "getter" non standard. Le getter n'est pas de type `const`. Cela permet alors depuis l'asset accéder à dividend.
+
+### Problème du "destructeur timide"
+Nous avons fait face à un bug très étrange sur notre programme. L'exécution du programme affichait un "segmentation fault" et nous ne comprenions pas comment une telle erreur avait lieu. Le problème provenait d'un destructeur que nous avons désigné comme "timide", car il n'était pas trouvé par notre compilateur ; le compilateur essayait donc de créer son destructeur, mais comme on manipulait un pointeur dont la mémoire était allouée dynamiquement, cela menait à une erreur.
+
+En effet, nous avons rapidement identifié que le programme essayait de détruire deux fois le même pointeur. En effet, à l'aide de "cout<<"Destruction dans european call"<<endl;" et de "cout<<"avant"<<endl;" et "cout<<"après"<<endl;" dans le destructeur non trivial de asset (cf ligne 98 de asset.cpp) qui supprime la mémoire allouée au pointeur AssetName. La destruction (en fin de programme) d'un objet de la classe european_call appelait le destructeur de european_call dans un premier temps, puis appelait le destructeur de option. Cependant, le programme ne semblait pas trouver le destructeur de european_call que nous avons écrit et définissait donc le sien qui amenait à la double destruction du même pointeur.
+
+Le constructeur non trouvé par notre programme était :
+```C++
+european_call::~european_call() {};
+```
+Le debugage consistait simplement à
+1. modifier le constructeur de la façon suivante (ajout d'un retour à la ligne): 
+```C++
+european_call::~european_call() {
+};
+```
+2. make run à nouveau le main ; nous n'avons alors plus le "segmentation fault".
+3. Et nous pouvions supprimer le retour à la ligne, pour revenir à :
+```C++
+european_call::~european_call() {};
+```
+4. make run à nouveau le main qui n'affiche plus de "segementation fault" (alors qu'à l'oeil nu, le c'est exactement le même destructeur qu'au début...).
+
+NB : puisque le bug avait lieu pour chacune des classes filles (european_call, european_put, asian_call, asian_put...), nous avons pu clairement identifier cette manipulation qui permet de debug (et l'avons même enregistrer en vidéo...).
+
+Nous ne savons à l'heure actuelle pas ce que nous devons retenir pour ne pas reproduire le bug (Le bug provenait peut être du compilateur que j'utilise ?). Toutefois, cela m'a appris à identifier efficacement l'origine d'un problème (avec les std::cout) et comprendre l'appel des destructeurs et constructeurs pour des classes héritées. Cette expérience nous a enfin montré que la définition de nos destructeurs non triviaux était un point très important, pour qu'ils ne soient pas implémentés automatiquement par le compilateur.
+
 
 ## V. Méthodologie de pricing
 ### Notations
