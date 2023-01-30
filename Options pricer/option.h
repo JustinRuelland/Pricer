@@ -14,10 +14,7 @@ protected :
 public :
 	~option();
 	// Constructor
-	option() {
-		asset empty_asset;
-		this->ptr_underlying = *empty_asset; //So that the price and replication functions can handle a default option (otherwise "segmentation" fault if the functions handle a nullptr)
-	};
+	option() {};
 	option(option&);
 	option(asset* ptr_underlying, double K, double T);
 
