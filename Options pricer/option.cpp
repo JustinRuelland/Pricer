@@ -21,11 +21,17 @@ option::option(asset* ptr_underlying, double K, double T) {
 // Overloading of the operators << and >> of iostream
 std::ostream& operator<<(std::ostream& output, const option& o) {
 	asset* ptr_underlying = o.get_ptr_underlying();
-	double S = (*ptr_underlying).get_SpotPrice();
-	double sigma = (*ptr_underlying).get_Volatility();
-	double r = (*ptr_underlying).get_r();
 
-	output << "an " << o.type() <<" with : " << "\n	- Strike : " << o.K << "\n	- Spot price : " << S << "\n	- Maturity : " << o.T << " years" << "\n	- Volatility : " << sigma << "\n	- Risk free rate : " << r * 100 << "%" << "\n	- Price (Black-Scholes method) : " << o.price()<<"\n";
+	if (ptr_underlying == nullptr) {
+		output << "The option has not been initialised (the pointer of the underlying is not initialised).";
+	}
+	else {
+		double S = (*ptr_underlying).get_SpotPrice();
+		double sigma = (*ptr_underlying).get_Volatility();
+		double r = (*ptr_underlying).get_r();
+
+		output << "an " << o.type() << " with : " << "\n	- Strike : " << o.K << "\n	- Spot price : " << S << "\n	- Maturity : " << o.T << " years" << "\n	- Volatility : " << sigma << "\n	- Risk free rate : " << r * 100 << "%" << "\n	- Price (Black-Scholes method) : " << o.price() << "\n";
+	}
 	return output;
 };
 
