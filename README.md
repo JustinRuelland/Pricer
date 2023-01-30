@@ -32,8 +32,8 @@ Choix de représentation :
 Légende du diagramme de classe UML:
 - La flèche indique un héritage. La classe mère de l'héritage est pointée par la flèche.
 - Les traits avec un losange indique :
-  - pour un losange noir : une relation de composition (le losange est de l'agrégat)
-  - pour un losange creux : une relation d'agrégation (le losange ets du côté de l'objet qui est ag)
+  - pour un losange noir : une relation de composition (Le losange est du côté de l'objet qui est composé par l'autre objet. Comme c'est une relation de composition, la destruction de l'objet composé détruit l'objet composant.)
+  - pour un losange creux : une relation d'agrégation (le losange est du côté de l'objet agrégat. Comme c'est une relation d'agrégation, la destruction de l'objet agrégat ne détruit pas l'objet agrégé.)
 
 ### Classe asset
 Nous avons une classe **asset** pour les actifs financiers.
