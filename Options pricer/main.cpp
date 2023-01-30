@@ -7,6 +7,8 @@
 #include "asset.h"
 #include "gap_call.h"
 #include "gap_put.h"
+#include "european_lookback_call.h"
+#include "european_lookback_put.h"
 
 int main()
 {
@@ -39,8 +41,8 @@ int main()
 
 	asset* ptr_asset1 =&Asset1;
 	std::cout << Asset1 << std::endl;
-	european_call mon_call;
-
+	european_call mon_call(ptr_asset1, K, T);
+	
 	
 
 	mon_call.replication();
@@ -55,14 +57,35 @@ int main()
 
 	cout << mon_call << endl;
 
-
 	// Illustrer la gestion d'un affichage d'une option créée par défaut
 	european_put default_put;
 	cout << default_put << endl;
 
 	// Test gap
-	gap_call mon_gap(ptr_asset1,K, T, K);
+	gap_call mon_gap;
 	cout << mon_gap.price() << endl;
+
+	// Test lookback
+	double m = 90;
+	double M = 110;
+	K = 50.0;
+	S = 100.0;
+	T = 1;
+	sigma = 0.30;
+	european_lookback_call mon_lookback_c(ptr_asset1, K, T, m);
+	european_lookback_put mon_lookback_p(ptr_asset1, K, T, M);
+
+	cout << "Risk Free Rate :" << endl;
+	cout << (*ptr_asset1).get_r() << endl;
+	cout << "Min spot:" << endl;
+	cout << m << endl;
+	cout << "Max spot:" << endl;
+	cout << M << endl;
+	std::cout << Asset1 << std::endl;
+	cout << "Lookback Call Price:" << endl;
+	cout << mon_lookback_c.price() << endl;
+	cout << "Lookback Put Price:" << endl;
+	cout << mon_lookback_p.price() << endl;
 
 	
 	return 0;
