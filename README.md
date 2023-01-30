@@ -42,6 +42,7 @@ Les variables membres de la classe *asset* sont :
 - CurrentTime : la date à laquelle est évaluée l'actif,
 - SpotPrice : le prix spot de l'actif,
 - Volatility : la volatilité de l'action,
+- r : le taux sans risque (c'est un membre statique de la classe, car il doit être le même pour tous les asset),
 - Dividends : les dividendes futures de l'actif, qui est un objet de la classe dividend.
 
 La classe **dividend** est une classe agrégée à la classe *asset*.
