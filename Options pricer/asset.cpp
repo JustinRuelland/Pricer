@@ -2,6 +2,7 @@
 #include "asset.h"
 #include <cmath>
 #include <iomanip>
+#include <limits>
 // #include <termcolor/termcolor.hpp>
 
 //************** Dividend functions **************
