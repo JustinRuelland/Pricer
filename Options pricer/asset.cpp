@@ -65,6 +65,12 @@ void dividend::set_Next(double Next){
 	this->Next = modulo(Next, this->Periods);
 }
 
+void dividend::operator=(const dividend& Div){
+	this->Type = Div.Type;
+	this->Rate = Div.Rate;
+	this->Periods = Div.Periods;
+	this->Next = Div.Next;
+}
 
 //************** Asset functions **************
 
@@ -153,7 +159,16 @@ void asset::set_Volatility(double Volatility){
 void asset::set_Dividends(dividend Dividends){
 	this->Dividends = Dividends;
 }
+
 void asset::set_r(double r) { asset::r = r; };
+
+void asset::operator=(const asset& Asset1){
+	this->AssetName = NameCopie(Asset1.AssetName);
+	this->CurrentTime = Asset1.CurrentTime;
+	this->SpotPrice = Asset1.SpotPrice;
+	this->Volatility = Asset1.Volatility;
+	this->Dividends = Asset1.Dividends;
+}
 
 //Advanced functions
 
@@ -342,8 +357,8 @@ std::istream& operator>>(std::istream& input, asset& Asset){
 
 	return input;
 }
-
-/*int main(int argc, char const* argv[])
+/*
+int main(int argc, char const* argv[])
 {
 	
 	char name[20];
@@ -359,9 +374,14 @@ std::istream& operator>>(std::istream& input, asset& Asset){
 	asset Asset2 = Asset1.Asset_Estimation(100, 0.5);
 
 	std::cout << Asset2 << std::endl;
+
+	asset A1;
+	std::cin >> A1;
+	dividend d1 = Asset1.get_Dividends();
+	std::cout << A1;
 	return 0;
-}
-*/
+}*/
+
 
 
 
