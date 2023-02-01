@@ -41,6 +41,9 @@ public:
 	void set_Periods(double);
 	void set_Next(double);
 
+	//*** Overload assignment operator ***
+	void operator=(const dividend&);
+
 };
 
 
@@ -90,7 +93,8 @@ public:
 	void set_Dividends(dividend);
 	void set_r(double r);
 
-
+	//*** Overload assignment operator ***
+	void operator=(const asset&);
 
 	//************** Advanced functions **************
 
