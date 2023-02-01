@@ -27,7 +27,6 @@ public :
 	double get_K() const { return this->K; } ;
 	double get_T() const { return this->T; };
 	asset* get_ptr_underlying() const { return this->ptr_underlying; } ;
-	asset* get_allias_underlying() { return this->ptr_underlying; }; 
 
 	// Setter
 	void set_K(double K) { this->K = K; };
