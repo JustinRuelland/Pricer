@@ -10,6 +10,11 @@ asian_call::~asian_call() {};
 
 // Member function
 double asian_call::price() const {
+	// manage of an option constructed by the default constructor and ptr_underlying not initialized
+	if (ptr_underlying == nullptr) {
+		cout << "The option has not been initialised (the pointer of the underlying is not initialised). Thus, the price doesn't exist.";
+		return 0;
+	}
 	// to valuate an asian (arithmetic) call, we need to compute the average of the price (S_mean) of the underlying asset
 	double S = (*ptr_underlying).get_SpotPrice();
 	double sigma = (*ptr_underlying).get_Volatility();

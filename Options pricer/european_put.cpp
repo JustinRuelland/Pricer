@@ -10,6 +10,12 @@ european_put::~european_put() {};
 
 // Member function
 double european_put::price() const {
+	// manage of an option constructed by the default constructor and ptr_underlying not initialized
+	if (ptr_underlying == nullptr) {
+		cout << "The option has not been initialised (the pointer of the underlying is not initialised). Thus, the price doesn't exist.";
+		return 0;
+	}
+
 	double S = (*ptr_underlying).get_SpotPrice();
 	double r = (*ptr_underlying).get_r();
 
@@ -37,7 +43,11 @@ string european_put::type() const {
 }
 
 void european_put::replication() const {
-	
+	// manage of an option constructed by the default constructor and ptr_underlying not initialized
+	if (ptr_underlying == nullptr) {
+		cout << "The option has not been initialised (the pointer of the underlying is not initialised). Thus, the price is not possible"; 
+	}
+
 	european_call call(ptr_underlying, K, T);
 	double r = (*ptr_underlying).get_r();
 

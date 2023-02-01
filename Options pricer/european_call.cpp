@@ -13,6 +13,13 @@ european_call::~european_call() {};
 
 // Member function
 double european_call::price() const {
+	// manage of an option constructed by the default constructor and ptr_underlying not initialized
+	if (ptr_underlying == nullptr) {
+		cout << "The option has not been initialised (the pointer of the underlying is not initialised). Thus, the price doesn't exist.";
+		return 0;
+	}
+
+
 	double S = (*ptr_underlying).get_SpotPrice();
 	double sigma = (*ptr_underlying).get_Volatility();
 	double r = (*ptr_underlying).get_r();
@@ -70,7 +77,12 @@ string european_call::type() const {
 };
 
 void european_call::replication() const {
-	
+	// manage of an option constructed by the default constructor and ptr_underlying not initialized
+	if (ptr_underlying == nullptr) {
+		cout << "The option has not been initialised (the pointer of the underlying is not initialised). Thus, replication is not possible";
+	}
+
+
 	european_put put(ptr_underlying, K, T);
 	double r = (*ptr_underlying).get_r();
 
