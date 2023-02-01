@@ -111,6 +111,26 @@ La classe option (et ce qui en hérite), d'un côté, et la classe asset (et la 
 
 Fort de cette expérience, nous en concluons que nous devrons pour un prochain projet de programmation, davantage nous mettre d'accord sur les fonctionnalités de chacune des classes, notamment sur les types des arguments et le type renvoyé des fonctions. Une idée aussi serait d'essayait de réaliser un diagramme de classes avant le début du codage en ajoutant les appels de fonctions entre classes qui seront mobilisés.
 
+Par exemple, nous trouvons une limite importante de notre projet dans le manque de dynamisme temporel du pricing d'options. Nous entendons par là que si le prix d'un asset est actualisé à une nouvelle date (avec la fonction assset_actualization(t,S)), la méthode .price() de la classe option va prendre en compte le nouveau prix de l'asset, mais pas du changement de la date actuelle ("Current"). Par exemple, nous considérons une option émise avec une maturité de deux ans. Nous apprenons à bout d'un an que le prix du sous-jacent est $S'$ . Dans notre programme, nous entrons alors le code suivant :
+```C++
+double new_current_time = 1;
+
+mon_asset.asset_actualization(new_current_time,S');
+mon_option.price();
+```
+On s'attendrait à obtenir la nouvelle valeur de l'option en $t=1ans$ avec pour prix du sous-jacent $S'$ . Cependant, ces deux lignes renvoient le prix de l'option avec prix du sous-jacent $S'$ mais avec une maturité de 2 ans encore.
+Pour corriger cela, il faut alors entrer la syntaxe suivante :
+```C++
+double new_current_time = 1;
+
+mon_asset.asset_actualization(new_current_time,S');
+double old_T = mon_option.get_T();
+mon_option.set_T(old_T - new_current_time);
+mon_option.price();
+```
+On remarque que cette solution n'est pas robuste à une deuxième actualisation du temps.
+
+
 ### Modification d'un attribut d'une classe attribut
 **JR**
 Problème :
