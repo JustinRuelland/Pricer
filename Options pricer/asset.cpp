@@ -324,33 +324,33 @@ double modulo(double x, double y){
 }
 
 std::istream& operator>>(std::istream& input, asset& Asset){
-	std::cout << "\n Asset Creation : ";
+	std::cout << "\n===============================\n Asset Creation : ";
 	std::cout << "\n - Enter the Asset Name (19 characters max) : ";
 	char name[20];
 	input >> std::setw(19) >> name;
 	input.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 
-	std::cout << "\n Current Time (in years) : ";
+	std::cout << "\n - Current Time (in years) : ";
 	input >> Asset.CurrentTime;
-	std::cout << "\n Current Spot Price : ";
+	std::cout << "\n - Current Spot Price : ";
 	input >> Asset.SpotPrice;
-	std::cout << "\n Volatility : ";
+	std::cout << "\n - Volatility : ";
 	input >> Asset.Volatility;
 
 	// Dividends settings
-	std::cout << "\n Dividends type \n An asset without dividends =0 \n	An asset with lump payment of dividends =1 \n	An asset with continuous dividend payment =2 : ";
+	std::cout << "===============================\n Dividends type \n (An asset without dividends =0\n An asset with lump payment of dividends =1 \n An asset with continuous dividend payment =2) : ";
 	int DividendsType;
 	double Next = 0;
 	double Periods = 0;
 	double RateDiv = 0;
 	input >> DividendsType;
 	if(DividendsType != 0){
-		std::cout << "\n Rate of the dividends : ";
+		std::cout << "\n - Rate of the dividends : ";
 		input >> RateDiv;
-		std::cout << "\n Periods of dividends : ";
+		std::cout << "\n - Periods of dividends : ";
 		input >> Periods;
-		std::cout << "\n Next dividends term : ";
+		std::cout << "\n - Next dividends term : ";
 		input >> Next;
 	}
 
@@ -358,6 +358,7 @@ std::istream& operator>>(std::istream& input, asset& Asset){
 	Asset.set_Dividends(DivG);
 
 	Asset.set_AssetName(name);
+	std::cout << "\n Your asset have been initialized.\n===============================";
 
 	return input;
 }
