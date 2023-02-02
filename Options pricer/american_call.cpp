@@ -116,3 +116,6 @@ string american_call::type() const {
 	return name;
 };
 
+void american_call::replication() const {
+	cout << "Replication not implemented in this program. (An " << this->type() << " is not easily replicable)." << endl;
+}
