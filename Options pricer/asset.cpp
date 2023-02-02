@@ -138,7 +138,7 @@ dividend asset::get_Dividends() const{
 	return this->Dividends;
 }
 
-double asset::get_r() { return r; };
+double asset::get_r() const { return r; };
 
 
 void asset::set_AssetName(char Name[20]){

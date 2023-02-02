@@ -83,7 +83,7 @@ public:
 	double get_Volatility() const;
 	dividend& get_alias_Dividends();
 	dividend get_Dividends() const;
-	double get_r();
+	double get_r() const;
 
 	//*** Setter ***
 	void set_AssetName(char Name[20]);
