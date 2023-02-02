@@ -90,6 +90,7 @@ double american_call::price() const{
 	double V_0 = fmax(Mean((*Ptr_Mat_Simulation).col(1), branche)*exp(-Riskfree*delta_t), fmax((S_0-Strike), 0.0));
 	
 	if(Mean((*Ptr_Mat_Simulation).col(1), branche)*exp(-Riskfree*delta_t) <= fmax((S_0-Strike), 0.0)){
+		delete Ptr_Mat_Simulation;
 		return V_0; // Here we have that the price of the option is greater at emission than it could be (by simulations) after (it means that the option have to be exercise at emission)
 	}
 	
@@ -109,6 +110,7 @@ double american_call::price() const{
 		//Mean_value += Max_Row(Ptr_Curr_row, noeuds);
 	}
 	double branche_d = branche; // some specifications to avoid euclidian division
+	delete Ptr_Mat_Simulation;
 	return (1.0/branche_d)*Mean_value;
 }
 
