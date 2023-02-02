@@ -45,7 +45,7 @@ string european_put::type() const {
 void european_put::replication() const {
 	// manage of an option constructed by the default constructor and ptr_underlying not initialized
 	if (ptr_underlying == nullptr) {
-		cout << "The option has not been initialised (the pointer of the underlying is not initialised). Thus, the price is not possible"; 
+		cout << "The option has not been initialised (the pointer of the underlying is not initialised). Thus, replication is not possible"; 
 	}
 
 	european_call call(ptr_underlying, K, T);

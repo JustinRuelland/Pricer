@@ -11,9 +11,8 @@
 using namespace std;
 
 int main()
-{
-	std::cout << "WELCOME to our pricer !\n";
-	cout << "Let's present you some features our program\n :";
+{	std::cout << "WELCOME to our pricer !\n";
+	cout << "Let's introce you some features of our program\n :";
 	/// Default values for options and underlying
 	double K = 100.0;
 	double S = 100.0;
@@ -49,7 +48,7 @@ int main()
 	cout << my_american_call << endl;
 
 
-	// Initialization of an option and its underlying by the user
+	//---------- Initialization of an option and its underlying by the user ----------
 	cout << "\nCreate your own option :";
 	european_call euro;
 	cin >> euro;
@@ -62,29 +61,11 @@ int main()
 
 	cout << euro << endl;
 	
-
-	/*
-	asset* ptr_asset1 =&Asset1;
-	std::cout << Asset1 << std::endl;
-	european_call mon_call(ptr_asset1, K, T);
-
-	mon_call.replication();
-	european_put mon_put(ptr_asset1, K, T);
-	cout << mon_put.price() << endl;
-	mon_put.replication();
-	cout << (*ptr_asset1).get_r() << endl;
-
-	asian_put mon_asiat(ptr_asset1, K, T);
-	cout << mon_asiat.price() << endl;
-
-
-	cout << mon_call << endl;
-
 	// To illustrate the management of a display of an option created by default
 	european_put default_put;
 	cout << default_put << endl;
 
-	*/
+	
 
 	return 0;
 }
