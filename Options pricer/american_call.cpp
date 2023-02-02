@@ -111,5 +111,8 @@ double american_call::price() const{
 	return (1.0/branche_d)*Mean_value;
 }
 
-
+string american_call::type() const {
+	string name = "american call";
+	return name;
+};
 

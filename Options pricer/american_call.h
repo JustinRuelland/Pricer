@@ -14,5 +14,5 @@ public :
 
 	// Member function
 	double price() const;
-	//string type() const;
+	string type() const;
 };
