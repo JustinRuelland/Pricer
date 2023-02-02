@@ -9,24 +9,31 @@
 #include "gap_put.h"
 #include "european_lookback_call.h"
 #include "european_lookback_put.h"
+#include <iomanip>
+using namespace std;
 
 int main()
 {
-	std::cout << "Hello World!fef\n";
-	double K = 50.0;
+	std::cout << "Welcome to our pricer !\n";
+
+	double K = 100.0;
 	double S = 100.0;
 	double T = 1;
 	double sigma = 0.30;
-	//european_call call1(K, S, T, sigma);
 
-	char name[20];
-	
 	asset Asset1;
 
 	//// Naming of the asset
 	std::cout << "Enter the name of your asset : ";
+	char name[20];
 	std::cin >> name;
 	Asset1.set_AssetName(name);
+
+
+
+	std::cout << "Enter the risk free rate of your market : ";
+	double risk_free_rate;
+	std::cin >>  risk_free_rate;
 	Asset1.set_r(0.05);
 
 	Asset1.set_SpotPrice(S);
@@ -65,7 +72,7 @@ int main()
 	cout << mon_gap.price() << endl;
 
 	// Test lookback
-	double m = 90;
+	double m = 100;
 	double M = 110;
 
 	european_lookback_call mon_lookback_c(ptr_asset1, K, T, m);
@@ -84,6 +91,20 @@ int main()
 	cout << "Lookback Put Price:" << endl;
 	cout << mon_lookback_p.price() << endl;
 
+	// test à suprimer
+	european_call blabla;
+	cout << blabla.price() << endl;
 	
+	cout << mon_lookback_c.price() << endl;
+
+	european_call mon_european_eq_c(ptr_asset1, K, T);
+	cout << mon_european_eq_c.price() << endl;
+
+	//european_call cal_testcin;
+	//cin >> cal_testcin;
+
+	asset fd;
+	std::cin >> fd;
+
 	return 0;
 }
