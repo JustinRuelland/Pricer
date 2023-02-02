@@ -50,7 +50,7 @@ std::istream& operator>>(std::istream& input, option& o) {
 
 	asset* ptr_underlying = new asset;
 	input >> *ptr_underlying;
-
+	o.set_ptr_underlying(ptr_underlying);
 	cout << "The price of the " << o.type() << " you have just defined is : " << o.price() << ".\n";
 
 	return input;

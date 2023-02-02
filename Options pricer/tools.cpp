@@ -48,7 +48,16 @@ void Pricing_Spot(Eigen::VectorXd* SpotPrice, double Strike, Eigen::VectorXd* Fu
 	double spot;
 	for(int i=0; i<taille; i++){
 		spot = (*SpotPrice)(i);
-		(*SpotPrice)(i) = max(max(spot - Strike, 0.0), (*FuturValuation)(i) * exp(-delta*Riskfree));
+		(*SpotPrice)(i) = fmax(fmax(spot - Strike, 0.0), (*FuturValuation)(i) * exp(-delta*Riskfree));
+	}
+	//delete FuturValuation; // We delete the useless Vector of FuturValuation dynamically created by the RegLin function
+}
+
+void Pricing_Spot_bis(Eigen::VectorXd* SpotPrice, double Strike, Eigen::VectorXd* FuturValuation, int taille, double delta, double Riskfree){
+	double spot;
+	for(int i=0; i<taille; i++){
+		spot = (*SpotPrice)(i);
+		(*SpotPrice)(i) = fmax(fmax(Strike - spot, 0.0), (*FuturValuation)(i) * exp(-delta*Riskfree));
 	}
 	//delete FuturValuation; // We delete the useless Vector of FuturValuation dynamically created by the RegLin function
 }
@@ -65,7 +74,7 @@ double Mean(Eigen::VectorXd Vec, int taille){
 double Max_Row(Eigen::VectorXd* Row, int taille){
 	double MadMax = (*Row)(0);
 	for(int i=0; i<taille; i++){
-		MadMax = max(MadMax, (*Row)(i));
+		MadMax = fmax(MadMax, (*Row)(i));
 	}
 	return MadMax;
 }

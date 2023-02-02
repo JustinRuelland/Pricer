@@ -1,9 +1,9 @@
-#include "american_call.h"
+#include "american_put.h"
 #include "tools.h"
 
-american_call::~american_call(){};
+american_put::~american_put(){};
 
-double american_call::price() const{
+double american_put::price() const{
 	// manage of an option constructed by the default constructor and ptr_underlying not initialized
 	if (ptr_underlying == nullptr) {
 		cout << "The option has not been initialised (the pointer of the underlying is not initialised). Thus, the price doesn't exist.";
@@ -59,7 +59,7 @@ double american_call::price() const{
 		Ptr_Vec_SpotPrice = &Copy_Vec; 
 		// We point the SpotPrice trajectory so this pointer points basically toward S_t
 
-		Pricing_Spot(Ptr_Vec_SpotPrice, Strike, Estimated_Futur_Valuation, branche, delta_t, Riskfree);
+		Pricing_Spot_bis(Ptr_Vec_SpotPrice, Strike, Estimated_Futur_Valuation, branche, delta_t, Riskfree);
 		// From the last iteration we have the estimated Futur_Valuation E[V_{t+1}|S_t], so we valuate the asset V_t by the well known formula V_t = max((S_t - K)^+ , E[V_{t+1}|S_t])
 		if(i > 1){
 			delete Estimated_Futur_Valuation; // We delete the useless Vector of FuturValuation dynamically created by the RegLin function
@@ -87,9 +87,9 @@ double american_call::price() const{
 
 	}
 	// Now we have the Ptr_Mat_Simulation that is all the price of the Option following each nodes of times
-	double V_0 = fmax(Mean((*Ptr_Mat_Simulation).col(1), branche)*exp(-Riskfree*delta_t), fmax((S_0-Strike), 0.0));
+	double V_0 = fmax(Mean((*Ptr_Mat_Simulation).col(1), branche)*exp(-Riskfree*delta_t), fmax((Strike - S_0), 0.0));
 	
-	if(Mean((*Ptr_Mat_Simulation).col(1), branche)*exp(-Riskfree*delta_t) <= fmax((S_0-Strike), 0.0)){
+	if(Mean((*Ptr_Mat_Simulation).col(1), branche)*exp(-Riskfree*delta_t) <= fmax((Strike - S_0), 0.0)){
 		return V_0; // Here we have that the price of the option is greater at emission than it could be (by simulations) after (it means that the option have to be exercise at emission)
 	}
 	
@@ -111,8 +111,8 @@ double american_call::price() const{
 	return (1.0/branche_d)*Mean_value;
 }
 
-string american_call::type() const {
-	string name = "american call";
+string american_put::type() const {
+	string name = "american put";
 	return name;
 };
 

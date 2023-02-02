@@ -27,11 +27,11 @@ Choix de représentation :
 - les Getter et Setter pour chaque attribut des classes sont bien définis dans le code, nous ne les écrivons pas dans le diagramme de classe. 
 - Pareil pour le constructeur par défaut, par copie et le destructeur
 
-![Diagramme de classe UML](https://github.com/louisgeist/Pricer/blob/main/DiagramUML_v2.png)
+![Diagramme de classe UML](https://github.com/louisgeist/Pricer/blob/main/DiagramUML_v3.png)
 
 Légende du diagramme de classe UML:
 - La flèche indique un héritage. La classe mère de l'héritage est pointée par la flèche.
-- Les traits avec un losange indique :
+- Les traits avec un losange indiquent :
   - pour un losange noir : une relation de composition (Le losange est du côté de l'objet qui est composé par l'autre objet. Comme c'est une relation de composition, la destruction de l'objet composé détruit l'objet composant.)
   - pour un losange creux : une relation d'agrégation (le losange est du côté de l'objet agrégat. Comme c'est une relation d'agrégation, la destruction de l'objet agrégat ne détruit pas l'objet agrégé.)
 
@@ -43,17 +43,17 @@ Les variables membres de la classe *asset* sont :
 - SpotPrice : le prix spot de l'actif,
 - Volatility : la volatilité de l'action,
 - r : le taux sans risque (c'est un membre statique de la classe, car il doit être le même pour tous les asset),
-- Dividends : les dividendes futures de l'actif, qui est un objet de la classe dividend.
+- Dividends : les dividendes futurs de l'actif, qui est un objet de la classe dividend.
 
 La classe **dividend** est une classe agrégée à la classe *asset*.
 Ses variables membres sont :
 - Type : un entier dans $\{0,1,2\}$ qui indique le type de dividendes :
   - $0$ : signifie qu'il n'y a pas de dividendes,
-  - $1$ : désigne des dividendes à date de paiments discrets,
+  - $1$ : désigne des dividendes à date de paiements discrets,
   - $2$ : désigne des dividendes à paiements continus.
 - Rate : le taux des dévidendes
-- Periods : la période entre deux paiments (pertinent que pour une dividende de type 1)
-- Next : durée jusqu'au prochain paiment (pertinent que pour une dividende de type 1)
+- Periods : la période entre deux paiements (pertinent que pour un dividende de type 1)
+- Next : durée jusqu'au prochain paiement (pertinent que pour un dividende de type 1)
 
 
 ### Classe option
@@ -62,7 +62,7 @@ La classe *option* est une classe abstraite. Ses attributs sont :
 - sigma : la *volatilité* du sous-jacent,
 - ptr_underlying : pointeur vers un objet de la classe *asset*.
 
-Nous avons définis trois paires de classes qui héritent de cette interface *option* :
+Nous avons défini trois paires de classes qui héritent de cette interface *option* :
 - **Options européennes** : 
   - une classe *european_call*, 
   - une classe *european_put*,
@@ -89,7 +89,7 @@ Les fonctions membres classiques :
 - les *Setters*,
 
 #### Fonctions non-membres
-Nous avons surchargé les opérateurs de iostream ">>" et "<<" pour les classes *option* et *asset* (les classes d'options gap et lookback ne bénéficient pas d'un affichage aproprié de leurs caractéristiques. Par exemple, pour une gap option, le trigger price $k$ se s'affiche pas avec l'opérateur <<. Pour le connaître, il faut utiliser le getter get_k().)
+Nous avons surchargé les opérateurs de iostream ">>" et "<<" pour les classes *option* et *asset*.
 
 ### Fonctions spécifiques aux classes
 #### Classe asset
@@ -107,9 +107,9 @@ Les fonctions membres spécifiques sont toutes des fonction purement virtuelles,
 
 ## IV. Critique des problèmes rencontrés et des solutions adoptées
 ### Organisation d'un programme de grande ambition
-La classe option (et ce qui en hérite), d'un côté, et la classe asset (et la classe dividend ), d'un autre, ont été codé par deux personnes. Nous avions réalisé des rendez-vous réguliers pour se mettre d'accord comment coder et aborder le programme, mais lorsqu'il était venu d'utiliser la classe asset dans la classe option (afin de valoriser des options sur sous-jacents avec dividendes), nous nous sommes rendus comptes de petites spécificités à nos deux manières de coder que nous n'avions pas anticipées. 
+La classe option (et ce qui en hérite), d'un côté, et la classe asset (et la classe dividend ), d'un autre, ont été codé par deux personnes. Nous avions réalisé des rendez-vous réguliers pour se mettre d'accord comment coder et aborder le programme, mais lorsqu'il était venu d'utiliser la classe asset dans la classe option (afin de valoriser des options sur sous-jacents avec dividendes), nous nous sommes rendu compte de petites spécificités à nos deux manières de coder que nous n'avions pas anticipées. 
 
-Fort de cette expérience, nous en concluons que nous devrons pour un prochain projet de programmation, davantage nous mettre d'accord sur les fonctionnalités de chacune des classes, notamment sur les types des arguments et le type renvoyé des fonctions. Une idée aussi serait d'essayait de réaliser un diagramme de classes avant le début du codage en ajoutant les appels de fonctions entre classes qui seront mobilisés.
+Forts de cette expérience, nous en concluons que nous devrons pour un prochain projet de programmation, davantage nous mettre d'accord sur les fonctionnalités de chacune des classes, notamment sur les types des arguments et le type renvoyé des fonctions. Une idée aussi serait d'essayer de réaliser un diagramme de classes avant le début du codage en ajoutant les appels de fonctions entre classes.
 
 Par exemple, nous trouvons une limite importante de notre projet dans le manque de dynamisme temporel du pricing d'options. Nous entendons par là que si le prix d'un asset est actualisé à une nouvelle date (avec la fonction assset_actualization(t,S)), la méthode .price() de la classe option va prendre en compte le nouveau prix de l'asset, mais pas du changement de la date actuelle ("Current"). Par exemple, nous considérons une option émise avec une maturité de deux ans. Nous apprenons à bout d'un an que le prix du sous-jacent est $S'$ . Dans notre programme, nous entrons alors le code suivant :
 ```C++
@@ -159,7 +159,7 @@ european_call::~european_call() {};
 ```
 4. make run à nouveau le main qui n'affiche plus de "segementation fault" (alors qu'à l'oeil nu, le c'est exactement le même destructeur qu'au début...).
 
-NB : puisque le bug avait lieu pour chacune des classes filles (european_call, european_put, asian_call, asian_put...), nous avons pu clairement identifier cette manipulation qui permet de debug (et l'avons même enregistrer en vidéo...).
+NB : puisque le bug avait lieu pour chacune des classes filles (european_call, european_put, asian_call, asian_put...), nous avons pu clairement identifier cette manipulation qui permet de debug (et l'avons même enregistré en vidéo...).
 
 Nous ne savons à l'heure actuelle pas ce que nous devons retenir pour ne pas reproduire le bug (Le bug provenait peut être du compilateur que j'utilise ?). Toutefois, cela m'a appris à identifier efficacement l'origine d'un problème (avec les std::cout) et comprendre l'appel des destructeurs et constructeurs pour des classes héritées. Cette expérience nous a enfin montré que la définition de nos destructeurs non triviaux était un point très important, pour qu'ils ne soient pas implémentés automatiquement par le compilateur.
 

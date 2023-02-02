@@ -50,7 +50,11 @@ double dividend::get_Next() const{
 }
 
 void dividend::set_Type(int Type){
-	this->Type = Type;
+	if(Type != 0 && Type !=1 && Type !=2){
+		this->Type = 0; // Default value
+	}else{
+		this->Type = Type;
+	}
 }
 
 void dividend::set_Rate(double Rate){
