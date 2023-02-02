@@ -105,7 +105,8 @@ double american_put::price() const{
 
 	for(int i=0; i<branche; i++){
 		Curr_row = (*Ptr_Mat_Simulation).transpose().col(i);
-		Mean_value += Max_Row(Ptr_Curr_row, noeuds);
+		Mean_value += (*Ptr_Curr_row)(0);
+		//Mean_value += Max_Row(Ptr_Curr_row, noeuds);
 	}
 	double branche_d = branche; // some specifications to avoid euclidian division
 	return (1.0/branche_d)*Mean_value;
