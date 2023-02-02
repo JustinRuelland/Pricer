@@ -17,6 +17,7 @@ char* transformation(char chaine[20]);
 char* copieee(const char chaine[20]);
 double* simulation_asset(double S_0, double Sigma, int noeuds, double delta, double riskfree);
 void Pricing_Spot(Eigen::VectorXd* SpotPrice, double Strike, Eigen::VectorXd* FuturValuation, int taille, double delta, double Riskfree);
+void Pricing_Spot_bis(Eigen::VectorXd* SpotPrice, double Strike, Eigen::VectorXd* FuturValuation, int taille, double delta, double Riskfree);
 double Max_Row(Eigen::VectorXd* Row, int taille);
 void Matrix_Atribution(Eigen::MatrixXd* Matrix, Eigen::VectorXd* Vector, int taille, int index_col);
 void Actualization_Vector(Eigen::VectorXd* Vector, double factor, int taille);
