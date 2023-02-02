@@ -8,7 +8,7 @@ PROG = myprog
 #
 # Fichiers sources (NE PAS METTRE les .h ni les .o seulement les .cpp)
 #
-SOURCES = asian_call.cpp asian_put.cpp asset.cpp cdf.cpp european_call.cpp european_put.cpp main.cpp option.cpp
+SOURCES = asian_call.cpp asian_put.cpp asset.cpp cdf.cpp european_call.cpp european_put.cpp main.cpp option.cpp american_call.cpp tools.cpp
 
 #
 # Fichiers objets (ne pas modifier sauf si l'extension n'est pas .cpp)
