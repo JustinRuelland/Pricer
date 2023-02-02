@@ -339,7 +339,7 @@ std::istream& operator>>(std::istream& input, asset& Asset){
 	input >> Asset.Volatility;
 
 	// Dividends settings
-	std::cout << "===============================\n Dividends type \n (An asset without dividends =0\n An asset with lump payment of dividends =1 \n An asset with continuous dividend payment =2) : ";
+	std::cout << "\n===============================\n Dividends type \n (An asset without dividends =0\n An asset with lump payment of dividends =1 \n An asset with continuous dividend payment =2) : ";
 	int DividendsType;
 	double Next = 0;
 	double Periods = 0;
