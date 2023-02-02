@@ -89,7 +89,7 @@ Les fonctions membres classiques :
 - les *Setters*,
 
 #### Fonctions non-membres
-Nous avons surchargé les opérateurs de iostream ">>" et "<<" pour les classes *option* et *asset* (les classes d'options gap et lookback ne bénéficient pas d'un affichage approprié de leurs caractéristiques. Par exemple, pour une gap option, le trigger price $k$ se s'affiche pas avec l'opérateur <<. Pour le connaître, il faut utiliser le getter get_k().)
+Nous avons surchargé les opérateurs de iostream ">>" et "<<" pour les classes *option* et *asset*.
 
 ### Fonctions spécifiques aux classes
 #### Classe asset
