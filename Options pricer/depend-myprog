@@ -1,0 +1,15 @@
+asian_call.o: asian_call.cpp asian_call.h option.h asset.h
+asian_put.o: asian_put.cpp asian_put.h option.h asset.h
+asset.o: asset.cpp asset.h
+cdf.o: cdf.cpp cdf.h
+european_call.o: european_call.cpp european_call.h option.h asset.h \
+ european_put.h cdf.h
+european_put.o: european_put.cpp european_put.h option.h asset.h \
+ european_call.h
+main.o: main.cpp cdf.h european_call.h option.h asset.h european_put.h \
+ asian_call.h asian_put.h american_call.h tools.h
+option.o: option.cpp option.h asset.h
+american_call.o: american_call.cpp american_call.h tools.h option.h \
+ asset.h
+american_put.o: american_put.cpp american_put.h tools.h option.h asset.h
+tools.o: tools.cpp tools.h

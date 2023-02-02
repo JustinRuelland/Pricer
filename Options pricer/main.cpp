@@ -7,6 +7,7 @@
 #include "asset.h"
 #include <iomanip>
 #include "american_call.h"
+#include "american_put.h"
 #include "european_put.h"
 using namespace std;
 
@@ -14,8 +15,8 @@ int main()
 {	std::cout << "WELCOME to our pricer !\n";
 	cout << "Let's introce you some features of our program\n :";
 	/// Default values for options and underlying
-	double K = 100.0;
-	double S = 100.0;
+	double K = 40.0;
+	double S = 50.0;
 	double T = 1;
 	double sigma = 0.30;
 
@@ -36,16 +37,16 @@ int main()
 	// Options construction
 	asset* ptr_underlying = &my_asset;
 
-	european_call my_european_call(ptr_underlying,K,T);
-	cout << my_european_call << endl;
-	my_european_call.replication();
+	european_put my_european_put(ptr_underlying,K,T);
+	cout << my_european_put << endl;
+	my_european_put.replication();
 
 	asian_put my_asian_put(ptr_underlying, K, T);
 	cout << my_asian_put << endl;
 	my_asian_put.replication();
 
-	american_call my_american_call(ptr_underlying, K, T);
-	cout << my_american_call << endl;
+	american_put my_american_put(ptr_underlying, K, T);
+	cout << my_american_put << endl;
 
 
 	//---------- Initialization of an option and its underlying by the user ----------
