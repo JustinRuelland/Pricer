@@ -87,9 +87,9 @@ double american_call::price() const{
 
 	}
 	// Now we have the Ptr_Mat_Simulation that is all the price of the Option following each nodes of times
-	double V_0 = max(Mean((*Ptr_Mat_Simulation).col(1), branche)*exp(-Riskfree*delta_t), max((S_0-Strike), 0.0));
+	double V_0 = fmax(Mean((*Ptr_Mat_Simulation).col(1), branche)*exp(-Riskfree*delta_t), fmax((S_0-Strike), 0.0));
 	
-	if(Mean((*Ptr_Mat_Simulation).col(1), branche)*exp(-Riskfree*delta_t) <= max((S_0-Strike), 0.0)){
+	if(Mean((*Ptr_Mat_Simulation).col(1), branche)*exp(-Riskfree*delta_t) <= fmax((S_0-Strike), 0.0)){
 		return V_0; // Here we have that the price of the option is greater at emission than it could be (by simulations) after (it means that the option have to be exercise at emission)
 	}
 	
