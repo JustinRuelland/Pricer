@@ -63,10 +63,20 @@ int main()
 	cout << euro << endl;
 	
 	// To illustrate the management of a display of an option created by default
-	european_put default_put;
-	cout << default_put << endl;
+	//european_put default_put;
+	//cout << default_put << endl;
 
-	
+	// To illustrate the estimation of the asset
+	cout << "\n Estimation of the futur price of your asset : " << my_asset.get_AssetName() << endl;
+	double time;
+	cout << "Date for the estimatation (in years) : " << endl;
+	cin >> time;
+	if(time < my_asset.get_CurrentTime()){
+		cout <<"Invalid date" << endl;
+		time = my_asset.get_CurrentTime();
+	}
+	asset asset_estimated = my_asset.Asset_Estimation(time, my_asset.get_r());
+	cout << "Asset estimated : " << asset_estimated << endl;
 
 	return 0;
 }
