@@ -13,7 +13,7 @@ using namespace std;
 
 int main()
 {	std::cout << "WELCOME to our pricer !\n";
-	cout << "Let's introce you some features of our program\n :";
+	cout << "Let's introduce you some features of our program :\n";
 	/// Default values for options and underlying
 	double K = 40.0;
 	double S = 50.0;
@@ -26,12 +26,7 @@ int main()
 	my_asset.set_Volatility(sigma);
 	my_asset.set_CurrentTime(0.0) ;
 
-	asset my_asset_no_div(my_asset);
-
-	my_asset.get_alias_Dividends().set_Type(1);
-	my_asset.get_alias_Dividends().set_Rate(0.0125);
-	my_asset.get_alias_Dividends().set_Periods(0.25);
-	my_asset.get_alias_Dividends().set_Next(0.1666);
+	my_asset.get_alias_Dividends().set_Type(0);
 	my_asset.set_r(0.05);
 
 	// Options construction
@@ -48,6 +43,17 @@ int main()
 	american_put my_american_put(ptr_underlying, K, T);
 	cout << my_american_put << endl;
 
+	// Option with underlying with dividend
+	asset my_asset_div(my_asset);
+	my_asset_div.get_alias_Dividends().set_Type(1);
+	my_asset_div.get_alias_Dividends().set_Rate(0.0125);
+	my_asset_div.get_alias_Dividends().set_Periods(0.25);
+	my_asset_div.get_alias_Dividends().set_Next(0.1666);
+
+	asset* ptr_underlying_div = &my_asset_div;
+
+	european_call my_call_div(ptr_underlying_div, K, T);
+	cout << my_call_div << endl;
 
 	//---------- Initialization of an option and its underlying by the user ----------
 	cout << "\nCreate your own option :";
@@ -68,7 +74,7 @@ int main()
 
 	// To illustrate the estimation of the asset
 
-	cout << "\n Estimation of the futur price of your asset : " << my_asset.get_AssetName() << endl;
+	cout << "\n ================================= \n Estimation of the futur price of your asset : " << my_asset.get_AssetName() << endl;
 	double time;
 	cout << "Date for the estimatation (in years) : " << endl;
 	cin >> time;
