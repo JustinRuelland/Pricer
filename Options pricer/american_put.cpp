@@ -9,6 +9,7 @@ double american_put::price() const{
 		cout << "The option has not been initialised (the pointer of the underlying is not initialised). Thus, the price doesn't exist.";
 		return 0;
 	}
+	if (((*ptr_underlying).get_alias_Dividends().get_Type()!=1) && ((*ptr_underlying).get_alias_Dividends().get_Type() != 2)){
 	cout << " (Pricing may take a few minutes...) " << endl;
 
 	// getting assets attributes
@@ -113,6 +114,10 @@ double american_put::price() const{
 	double branche_d = branche; // some specifications to avoid euclidian division
 	delete Ptr_Mat_Simulation;
 	return (1.0/branche_d)*Mean_value;
+	}else{
+		cout << "We do not price an american option where underlying asset pays dividends." << endl;
+		return 0;
+	}
 }
 
 string american_put::type() const {
