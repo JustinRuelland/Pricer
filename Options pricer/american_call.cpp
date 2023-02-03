@@ -1,5 +1,6 @@
 #include "american_call.h"
 #include "tools.h"
+using namespace std;
 
 american_call::~american_call(){};
 
@@ -9,6 +10,7 @@ double american_call::price() const{
 		cout << "The option has not been initialised (the pointer of the underlying is not initialised). Thus, the price doesn't exist.";
 		return 0;
 	}
+	cout << " (Pricing may take a few minutes...) " << endl;
 
 	// getting assets attributes
 	double S_0 = (*ptr_underlying).get_SpotPrice();
