@@ -57,9 +57,9 @@ int main()
 	std::cout << "\nEnter the risk free rate of your market : ";
 	double risk_free_rate;
 	std::cin >> risk_free_rate;
-	my_asset.set_r(0.05);
+	my_asset.set_r(risk_free_rate);
 
-
+	
 	cout << euro << endl;
 	
 	// To illustrate the management of a display of an option created by default
@@ -67,6 +67,7 @@ int main()
 	//cout << default_put << endl;
 
 	// To illustrate the estimation of the asset
+
 	cout << "\n Estimation of the futur price of your asset : " << my_asset.get_AssetName() << endl;
 	double time;
 	cout << "Date for the estimatation (in years) : " << endl;
