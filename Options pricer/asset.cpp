@@ -3,11 +3,15 @@
 #include <cmath>
 #include <iomanip>
 #include <limits>
+#include <string>
 // #include <termcolor/termcolor.hpp>
 
 //************** Dividend functions **************
 
 // Primary functions
+
+char Global_NO_NAME[20] = "No name";
+
 
 dividend::dividend(){
 	this->Type = 0;
@@ -115,7 +119,11 @@ asset::~asset(){
 // Basic functions 
 
 char* asset::get_AssetName() const{
+	if(AssetName != nullptr){ 
 	return AssetName;
+	}else{
+		return Global_NO_NAME;
+	}
 }
 
 double asset::get_CurrentTime() const{
