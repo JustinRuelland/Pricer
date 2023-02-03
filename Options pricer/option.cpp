@@ -37,7 +37,7 @@ std::ostream& operator<<(std::ostream& output, const option& o) {
 	double sigma = (*ptr_underlying).get_Volatility();
 	double r = (*ptr_underlying).get_r();
 
-	output << "You have an " << o.type() << " with : " << "\n	- Strike : " << o.K << "\n	- Spot price : " << S << "\n	- Maturity : " << o.T << " years" << "\n	- Volatility : " << sigma << "\n	- Risk free rate : " << r * 100 << "%" << "\n	- Price (Black-Scholes method) : " << o.price() << "\n";
+	output << "an " << o.type() << " with : " << "\n	- Strike : " << o.K << "\n	- Spot price : " << S << "\n	- Maturity : " << o.T << " years" << "\n	- Volatility : " << sigma << "\n	- Risk free rate : " << r * 100 << "%" << "\n	- Price (Black-Scholes method) : " << o.price() << "\n";
 	return output;
 };
 
