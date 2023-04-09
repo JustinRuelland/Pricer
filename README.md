@@ -2,7 +2,7 @@
 ## General information
 2nd year project at ENSAE Paris. The aim of the project was to exploit the object-oriented programming features of C++. (Classes, Encapsulation, Inheritance and Polymorphism - Pointers and References).
 
-Grade : *comming soon*
+Grade : 18/20
 
 Topic : option pricing under the Black-Scholes model. (see more below and in the file *report_FR.pdf*)
 
